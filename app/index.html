@@ -218,12 +218,19 @@
       class="page-section px-8 flex flex-col gap-10 justify-start items-center text-center"
     >
       <!-- Hero image -->
-      <div class="relative max-w-5xl w-full mx-auto mt-3">
-        <img src="assets/home-image.jpg" alt="Jared & Mackensie" class="w-full rounded-2xl shadow-lg" />
-        <div class="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/40 to-transparent"></div>
-        <div class="absolute bottom-6 md:bottom-10 left-0 right-0 text-center">
-          <h1 class="font-[Reenie_Beanie] text-6xl md:text-8xl text-white drop-shadow-lg">Jared & Mackensie</h1>
-          <p class="text-white/90 text-lg md:text-xl tracking-wider font-light mt-1 drop-shadow">December 11, 2026 &middot; Escondido, CA</p>
+      <div class="max-w-5xl w-full mx-auto mt-3">
+        <div class="relative">
+          <img src="assets/home-image.jpg" alt="Jared & Mackensie" class="w-full rounded-2xl shadow-lg" />
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/40 to-transparent md:block hidden"></div>
+          <div class="absolute bottom-6 md:bottom-10 left-0 right-0 text-center md:block hidden">
+            <h1 class="font-[Reenie_Beanie] text-6xl md:text-8xl text-white drop-shadow-lg">Jared & Mackensie</h1>
+            <p class="text-white/90 text-lg md:text-xl tracking-wider font-light mt-1 drop-shadow">December 11, 2026 &middot; Escondido, CA</p>
+          </div>
+        </div>
+        <!-- Text below image on small screens -->
+        <div class="text-center mt-6 md:hidden">
+          <h1 class="font-[Reenie_Beanie] text-6xl text-gray-800">Jared & Mackensie</h1>
+          <p class="text-gray-700 text-lg tracking-wider font-light mt-1">December 11, 2026 &middot; Escondido, CA</p>
         </div>
       </div>
 
@@ -235,35 +242,121 @@
       </div>
 
       <!-- Countdown -->
-      <div class="max-w-2xl w-full mx-auto flex flex-col gap-5 items-center">
+      <div class="max-w-4xl w-full mx-auto flex flex-col gap-5 items-center">
         <p class="font-[Reenie_Beanie] text-4xl text-[#d4a574]">let the countdown begin</p>
-        <div class="flex items-center justify-center w-full gap-2 md:gap-3">
-          <div class="flex flex-col items-center">
-            <div class="rounded-xl bg-[#78201B] min-w-[72px] md:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-3">
-              <h3 class="countdown-element days font-semibold text-2xl md:text-3xl text-white text-center"></h3>
-              <p class="text-sm md:text-base font-light text-white/80 text-center">Days</p>
+        <div class="flex items-center justify-center w-full gap-3 md:gap-6">
+          <!-- Days -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="flex gap-1">
+              <div class="flip-digit-wrapper">
+                <div class="flip-digit" data-unit="days" data-position="tens">
+                  <div class="flip-digit-top">
+                    <span class="digit-value"></span>
+                  </div>
+                  <div class="flip-digit-bottom">
+                    <span class="digit-value"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-digit-wrapper">
+                <div class="flip-digit" data-unit="days" data-position="ones">
+                  <div class="flip-digit-top">
+                    <span class="digit-value"></span>
+                  </div>
+                  <div class="flip-digit-bottom">
+                    <span class="digit-value"></span>
+                  </div>
+                </div>
+              </div>
             </div>
+            <p class="text-xs md:text-sm font-light text-gray-600 uppercase tracking-wider">Days</p>
           </div>
-          <span class="font-[Reenie_Beanie] text-3xl text-[#d4a574]">:</span>
-          <div class="flex flex-col items-center">
-            <div class="rounded-xl bg-[#78201B] min-w-[72px] md:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-3">
-              <h3 class="countdown-element hours font-semibold text-2xl md:text-3xl text-white text-center"></h3>
-              <p class="text-sm md:text-base font-light text-white/80 text-center">Hours</p>
+          
+          <span class="font-[Reenie_Beanie] text-3xl text-[#d4a574] mb-6">:</span>
+          
+          <!-- Hours -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="flex gap-1">
+              <div class="flip-digit-wrapper">
+                <div class="flip-digit" data-unit="hours" data-position="tens">
+                  <div class="flip-digit-top">
+                    <span class="digit-value"></span>
+                  </div>
+                  <div class="flip-digit-bottom">
+                    <span class="digit-value"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-digit-wrapper">
+                <div class="flip-digit" data-unit="hours" data-position="ones">
+                  <div class="flip-digit-top">
+                    <span class="digit-value"></span>
+                  </div>
+                  <div class="flip-digit-bottom">
+                    <span class="digit-value"></span>
+                  </div>
+                </div>
+              </div>
             </div>
+            <p class="text-xs md:text-sm font-light text-gray-600 uppercase tracking-wider">Hours</p>
           </div>
-          <span class="font-[Reenie_Beanie] text-3xl text-[#d4a574]">:</span>
-          <div class="flex flex-col items-center">
-            <div class="rounded-xl bg-[#78201B] min-w-[72px] md:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-3">
-              <h3 class="countdown-element minutes font-semibold text-2xl md:text-3xl text-white text-center"></h3>
-              <p class="text-sm md:text-base font-light text-white/80 text-center">Minutes</p>
+          
+          <span class="font-[Reenie_Beanie] text-3xl text-[#d4a574] mb-6">:</span>
+          
+          <!-- Minutes -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="flex gap-1">
+              <div class="flip-digit-wrapper">
+                <div class="flip-digit" data-unit="minutes" data-position="tens">
+                  <div class="flip-digit-top">
+                    <span class="digit-value"></span>
+                  </div>
+                  <div class="flip-digit-bottom">
+                    <span class="digit-value"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-digit-wrapper">
+                <div class="flip-digit" data-unit="minutes" data-position="ones">
+                  <div class="flip-digit-top">
+                    <span class="digit-value"></span>
+                  </div>
+                  <div class="flip-digit-bottom">
+                    <span class="digit-value"></span>
+                  </div>
+                </div>
+              </div>
             </div>
+            <p class="text-xs md:text-sm font-light text-gray-600 uppercase tracking-wider">Minutes</p>
           </div>
-          <span class="font-[Reenie_Beanie] text-3xl text-[#d4a574]">:</span>
-          <div class="flex flex-col items-center">
-            <div class="rounded-xl bg-[#78201B] min-w-[72px] md:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-3">
-              <h3 class="countdown-element seconds font-semibold text-2xl md:text-3xl text-white text-center"></h3>
-              <p class="text-sm md:text-base font-light text-white/80 text-center">Seconds</p>
+          
+          <span class="font-[Reenie_Beanie] text-3xl text-[#d4a574] mb-6">:</span>
+          
+          <!-- Seconds -->
+          <div class="flex flex-col items-center gap-2">
+            <div class="flex gap-1">
+              <div class="flip-digit-wrapper">
+                <div class="flip-digit" data-unit="seconds" data-position="tens">
+                  <div class="flip-digit-top">
+                    <span class="digit-value"></span>
+                  </div>
+                  <div class="flip-digit-bottom">
+                    <span class="digit-value"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="flip-digit-wrapper">
+                <div class="flip-digit" data-unit="seconds" data-position="ones">
+                  <div class="flip-digit-top">
+                    <span class="digit-value"></span>
+                  </div>
+                  <div class="flip-digit-bottom">
+                    <span class="digit-value"></span>
+                  </div>
+                </div>
+              </div>
             </div>
+            <p class="text-xs md:text-sm font-light text-gray-600 uppercase tracking-wider">Seconds</p>
           </div>
         </div>
       </div>

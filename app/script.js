@@ -67,8 +67,13 @@ window.addEventListener('DOMContentLoaded', () => {
     // Fresh domain.com visit — play hero animations, hero is visible
     navigateToPage('home');
   } else if (window.location.hash === '#/home' || window.location.hash === '#/') {
-    // Reload on #/home — show hero but skip animations
-    if (heroSection) heroSection.classList.add('no-animate');
+    // Reload on #/home — skip to main content, no hero
+    if (heroSection) {
+      heroSection.classList.add('no-animate');
+      heroSection.style.display = 'none';
+      introCompleted = true;
+    }
+    showNav();
     navigateToPage('home');
   } else {
     // Reload on #/anything-else — no hero at all
@@ -80,7 +85,10 @@ window.addEventListener('DOMContentLoaded', () => {
 // Listen for hash changes
 window.addEventListener('hashchange', () => {
   // After intro, all subsequent hero views skip animation
-  if (heroSection) heroSection.classList.add('no-animate');
+  if (heroSection) {
+    heroSection.classList.add('no-animate');
+    introCompleted = true; // Mark intro as completed so animation won't trigger
+  }
   handleRoute();
 });
 /////////// END ROUTING LOGIC ///////////
@@ -123,6 +131,11 @@ const navLogo = document.getElementById('navLogo');
 const navLogoMobile = document.getElementById('navLogoMobile');
 const heroFadeSpans = document.querySelectorAll('.hero-fade');
 
+// Track if intro animation has completed or is playing
+let introCompleted = false;
+let animationPlaying = false;
+let animationProgress = 0;
+
 // Measure natural widths of the fading spans on load
 let fadeSpanWidths = [];
 if (heroSection) {
@@ -131,13 +144,10 @@ if (heroSection) {
   });
 }
 
-if (heroSection) {
-  window.addEventListener('scroll', () => {
-    if (heroSection.classList.contains('hidden')) return;
-
-    const scrollY = window.scrollY;
-    const heroHeight = heroSection.offsetHeight;
-    const progress = Math.min(scrollY / heroHeight, 1);
+// Function to apply visual effects based on progress (0 to 1)
+function applyHeroAnimationEffects(progress) {
+  const endSize = 3.75; // rem (text-6xl, matches nav)
+  const startSize = window.innerWidth >= 768 ? 8 : 6; // rem
 
     // --- Phase 1 (0–15%): Subtitle and flowers fade out ---
     if (heroSubtitle) {
@@ -173,9 +183,6 @@ if (heroSection) {
     // --- Phase 3 (30–50%): Shrink font size from hero size to nav size ---
     const shrinkStart = 0.3;
     const shrinkEnd = 0.5;
-    // text-9xl = 8rem on md, text-6xl = 3.75rem target
-    const startSize = window.innerWidth >= 768 ? 8 : 6; // rem (text-9xl md / text-8xl sm)
-    const endSize = 3.75; // rem (text-6xl, matches nav)
     if (progress <= shrinkStart) {
       heroTitle.style.fontSize = '';
     } else if (progress >= shrinkEnd) {
@@ -199,6 +206,17 @@ if (heroSection) {
       heroTitle.style.visibility = 'hidden';
       floatingTitle.style.opacity = 0;
       showNav();
+      
+      // Mark intro as completed and transition to main content
+      if (!introCompleted) {
+        introCompleted = true;
+        // Smoothly transition to main content
+        setTimeout(() => {
+          heroSection.style.display = 'none';
+          window.scrollTo(0, 0);
+          document.body.style.overflow = ''; // Re-enable scrolling
+        }, 100);
+      }
     } else {
       // Hide hero title, show floating and move it
       heroTitle.style.visibility = 'hidden';
@@ -212,9 +230,7 @@ if (heroSection) {
       const startTop = heroRect.top + heroRect.height / 2;
       const startLeft = window.innerWidth / 2;
 
-      // End: where the nav logo sits (show nav temporarily off-screen to measure)
-      const targetEl = window.innerWidth >= 768 ? navLogo : navLogoMobile;
-      // The nav is hidden (-translate-y-full), so estimate: logo is ~30px from top, centered or left
+      // End: where the nav logo sits
       const endTop = window.innerWidth >= 768 ? 28 : 24;
       const endLeft = window.innerWidth >= 768 ? window.innerWidth / 2 : 48;
 
@@ -230,11 +246,63 @@ if (heroSection) {
       floatingTitle.style.lineHeight = '1';
     }
 
-    // Hide nav if scrolling back up into hero
+    // Hide nav if not at the end
     if (progress < floatEnd) {
       hideNav();
     }
-  });
+}
+
+// Controlled animation function
+function startHeroAnimation() {
+  if (animationPlaying || introCompleted) return;
+  
+  animationPlaying = true;
+  document.body.style.overflow = 'hidden'; // Disable scrolling during animation
+  window.scrollTo(0, 0); // Reset scroll position
+  
+  const duration = 3000; // 3 seconds for the full animation
+  const startTime = performance.now();
+  
+  function animate(currentTime) {
+    const elapsed = currentTime - startTime;
+    animationProgress = Math.min(elapsed / duration, 1);
+    
+    applyHeroAnimationEffects(animationProgress);
+    
+    if (animationProgress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      animationPlaying = false;
+    }
+  }
+  
+  requestAnimationFrame(animate);
+}
+
+if (heroSection) {
+  // Listen for any scroll or touch to trigger the animation (only on fresh visits)
+  let scrollTriggered = false;
+  
+  const triggerAnimation = (e) => {
+    // Only trigger animation if this is a fresh visit (isIntro)
+    if (isIntro && !scrollTriggered && !heroSection.classList.contains('hidden') && !introCompleted) {
+      scrollTriggered = true;
+      e.preventDefault();
+      startHeroAnimation();
+    }
+  };
+  
+  // Intercept scroll events only on fresh visits
+  if (isIntro) {
+    window.addEventListener('wheel', triggerAnimation, { passive: false });
+    window.addEventListener('touchstart', triggerAnimation, { passive: false });
+    window.addEventListener('keydown', (e) => {
+      // Trigger on arrow keys, space, page down
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', ' '].includes(e.key)) {
+        triggerAnimation(e);
+      }
+    });
+  }
 
   // Intersection Observer — safety net
   const observer = new IntersectionObserver(
@@ -255,60 +323,94 @@ if (heroSection) {
 /////////// END HERO SCROLL & NAV VISIBILITY ///////////
 
 /////////// COUNTDOWN TIMER LOGIC ///////////
-// count-down timer
-let dest = new Date("apr 25, 2026 10:00:00").getTime();
-let x = setInterval(function () {
-let now = new Date().getTime();
-let diff = dest - now;
+let dest = new Date("dec 11, 2026 10:00:00").getTime();
 
-// Check if the countdown has reached zero or negative
-if (diff <= 0) {
-  clearInterval(x); // Stop the countdown
-  return; // Exit the function
+// Store previous digit values to detect changes
+let previousDigits = {};
+
+function updateDigit(digitElement, newValue) {
+  const spans = digitElement.querySelectorAll('.digit-value');
+  const currentValue = spans[0].textContent;
+  
+  if (currentValue !== newValue) {
+    // Update both top and bottom with new value
+    spans.forEach(span => {
+      span.textContent = newValue;
+    });
+    
+    // Trigger flip animation
+    digitElement.classList.add('flipping');
+    
+    // Remove flipping class after animation
+    setTimeout(() => {
+      digitElement.classList.remove('flipping');
+    }, 500);
+  } else if (currentValue === '') {
+    // Initial load
+    spans.forEach(span => {
+      span.textContent = newValue;
+    });
+  }
 }
 
-let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+function updateCountdown() {
+  let now = new Date().getTime();
+  let diff = dest - now;
 
-if (days < 10) {
-days = `0${days}`;
-}
-if (hours < 10) {
-hours = `0${hours}`;
-}
-if (minutes < 10) {
-minutes = `0${minutes}`;
-}
-if (seconds < 10) {
-seconds = `0${seconds}`;
+  if (diff <= 0) {
+    clearInterval(countdownInterval);
+    return;
+  }
+
+  let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  // Pad with zeros
+  let daysStr = String(days).padStart(2, '0');
+  let hoursStr = String(hours).padStart(2, '0');
+  let minutesStr = String(minutes).padStart(2, '0');
+  let secondsStr = String(seconds).padStart(2, '0');
+
+  // Update days
+  const daysTens = document.querySelector('.flip-digit[data-unit="days"][data-position="tens"]');
+  const daysOnes = document.querySelector('.flip-digit[data-unit="days"][data-position="ones"]');
+  if (daysTens && daysOnes) {
+    updateDigit(daysTens, daysStr[0]);
+    updateDigit(daysOnes, daysStr[1]);
+  }
+
+  // Update hours
+  const hoursTens = document.querySelector('.flip-digit[data-unit="hours"][data-position="tens"]');
+  const hoursOnes = document.querySelector('.flip-digit[data-unit="hours"][data-position="ones"]');
+  if (hoursTens && hoursOnes) {
+    updateDigit(hoursTens, hoursStr[0]);
+    updateDigit(hoursOnes, hoursStr[1]);
+  }
+
+  // Update minutes
+  const minutesTens = document.querySelector('.flip-digit[data-unit="minutes"][data-position="tens"]');
+  const minutesOnes = document.querySelector('.flip-digit[data-unit="minutes"][data-position="ones"]');
+  if (minutesTens && minutesOnes) {
+    updateDigit(minutesTens, minutesStr[0]);
+    updateDigit(minutesOnes, minutesStr[1]);
+  }
+
+  // Update seconds
+  const secondsTens = document.querySelector('.flip-digit[data-unit="seconds"][data-position="tens"]');
+  const secondsOnes = document.querySelector('.flip-digit[data-unit="seconds"][data-position="ones"]');
+  if (secondsTens && secondsOnes) {
+    updateDigit(secondsTens, secondsStr[0]);
+    updateDigit(secondsOnes, secondsStr[1]);
+  }
 }
 
-// Get elements by class name
-let countdownElements = document.getElementsByClassName("countdown-element");
+// Initial update
+updateCountdown();
 
-// Loop through the elements and update their content
-for (let i = 0; i < countdownElements.length; i++) {
-let className = countdownElements[i].classList[1]; // Get the second class name
-switch (className) {
-  case "days":
-    countdownElements[i].innerHTML = days;
-    break;
-  case "hours":
-    countdownElements[i].innerHTML = hours;
-    break;
-  case "minutes":
-    countdownElements[i].innerHTML = minutes;
-    break;
-  case "seconds":
-    countdownElements[i].innerHTML = seconds;
-    break;
-  default:
-    break;
-}
-}
-}, 1000);
+// Update every second
+let countdownInterval = setInterval(updateCountdown, 1000);
 /////////// END COUNTDOWN TIMER LOGIC ///////////
 
 /////////// LIGHTBOX LOGIC ///////////
