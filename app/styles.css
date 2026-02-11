@@ -1,0 +1,156 @@
+
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-green: #0E3E09;
+    --color-red: #902124;
+    --color-chartreuse: #BA9F38;
+    --color-pale-lime: #E1CC96;
+    --color-cabernet: #64242E;
+    --color-cinnamon-satin: #D46A79;
+    --color-apricot: #F6CBB6;
+    --color-red-chai: #632626;
+    --color-masala: #9D5353;
+    --color-wine: #4D0011;
+    --color-blush: #C2858C;
+
+    --background-color: 
+    --primary-color: #2c3e50;
+    --secondary-color: #e8d5c4;
+    --accent-color: #d4a574;
+    --text-color: #333;
+    --light-bg: #faf8f5;
+    --red-bg: #902124;
+}
+
+/* Hero Background */
+.animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.flower-top-left {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    animation: fadeInSway 2s ease-out forwards;
+    height: 600px;
+    top: -200px;
+    left: -180px;
+    --rotation: 130deg;
+}
+
+.flower-top-right {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    animation: fadeInSway 2.3s ease-out forwards;
+    height: 550px;
+    top: -220px;
+    right: -165px;
+    --rotation: 225deg;
+}
+
+.flower-bottom-left {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    animation: fadeInSway 2.1s ease-out forwards;
+    height: 580px;
+    bottom: -210px;
+    left: -195px;
+    --rotation: 45deg;
+}
+
+.flower-bottom-right {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    animation: fadeInSway 1.9s ease-out forwards;
+    height: 620px;
+    bottom: -225px;
+    right: -175px;
+    --rotation: 315deg;
+}
+
+@keyframes fadeInSway {
+    0% {
+        opacity: 0;
+        transform: rotate(var(--rotation, 0deg)) translateX(var(--slide-in, 0)) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(var(--rotation, 0deg)) translateX(0) scale(1);
+    }
+}
+
+.page-section {
+    padding-top: 102px;
+    min-height: 100vh;
+}
+
+/* Hero text entrance animation */
+.hero-text-intro {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroTextIn 1.5s ease-out 1.2s forwards;
+}
+
+.hero-text-intro-delay {
+    animation-delay: 1.8s;
+}
+
+@keyframes heroTextIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero scroll letter animation */
+.hero-keep,
+.hero-fade {
+    display: inline-block;
+    transition: none; /* JS controls everything */
+}
+
+.hero-fade {
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+/* Skip hero animations — flowers and text jump to final state */
+.no-animate .flower-top-left,
+.no-animate .flower-top-right,
+.no-animate .flower-bottom-left,
+.no-animate .flower-bottom-right {
+    animation: none;
+    opacity: 1;
+}
+
+.no-animate .hero-text-intro {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.no-animate .hero-fade {
+    /* On non-intro loads, show full text immediately */
+    opacity: 1;
+}
+
+/* Hide default details marker across browsers */
+details summary::-webkit-details-marker {
+    display: none;
+}

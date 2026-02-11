@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Our Wedding</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="font-[Lato] bg-linear-to-br from-[#f5f0e8] to-[#e8ddd0]">
+    <!-- Hero Section -->
+    <section
+      id="hero"
+      class="h-screen flex items-center justify-center overflow-hidden border-b relative"
+    >
+      <div class="animated-background">
+        <img src="assets/cosmo-cluster-1.png" class="flower-top-left" alt="" />
+        <img src="assets/cosmo-cluster-1.png" class="flower-top-right" alt="" />
+        <img
+          src="assets/cosmo-cluster-1.png"
+          class="flower-bottom-left"
+          alt=""
+        />
+        <img
+          src="assets/cosmo-cluster-1.png"
+          class="flower-bottom-right"
+          alt=""
+        />
+      </div>
+      <div class="relative z-10 text-center flex flex-col items-center justify-center gap-6">
+        <div id="heroTitle" class="font-[Reenie_Beanie] text-8xl md:text-9xl text-center hero-text-intro whitespace-nowrap">
+          <span class="hero-keep">J</span><span class="hero-fade">ared</span>
+          <span class="hero-keep">&nbsp;&amp;&nbsp;</span>
+          <span class="hero-keep">M</span><span class="hero-fade">ackensie</span>
+        </div>
+        <div id="heroSubtitle" class="hero-text-intro hero-text-intro-delay">
+          <div class="text-xl md:text-2xl tracking-wider font-light">Escondido, CA</div>
+          <div class="text-xl md:text-2xl tracking-wider font-light">December 11, 2026</div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- Floating J & M for scroll-to-nav animation -->
+    <div
+      id="floatingTitle"
+      class="fixed z-150 font-[Reenie_Beanie] pointer-events-none opacity-0"
+      style="top: 50%; left: 50%; transform: translate(-50%, -50%)"
+    >J & M</div>
+
+    <!-- Nav Bar -->
+    <nav
+      id="navBar"
+      class="fixed z-100 top-0 w-full border-b bg-linear-to-br from-[#f5f0e8] to-[#e8ddd0] -translate-y-full opacity-0 transition-all duration-500"
+    >
+      <!-- Mobile: logo + hamburger -->
+      <div class="flex items-center justify-between px-6 py-3 md:hidden">
+        <div id="navLogoMobile" class="font-[Reenie_Beanie] text-6xl leading-none">J & M</div>
+        <button
+          id="hamburgerBtn"
+          class="flex flex-col justify-center items-center gap-1.5 w-10 h-10 cursor-pointer"
+          aria-label="Open menu"
+        >
+          <span
+            class="hamburger-line block w-6 h-0.5 bg-gray-800 transition-all duration-300"
+          ></span>
+          <span
+            class="hamburger-line block w-6 h-0.5 bg-gray-800 transition-all duration-300"
+          ></span>
+          <span
+            class="hamburger-line block w-6 h-0.5 bg-gray-800 transition-all duration-300"
+          ></span>
+        </button>
+      </div>
+      <!-- Desktop: centered logo + horizontal links -->
+      <div class="hidden md:flex flex-col items-center px-10 gap-2">
+        <div id="navLogo" class="font-[Reenie_Beanie] text-6xl">J & M</div>
+        <ul class="flex gap-8 font-[Lato] font-light text-sm tracking-wider">
+          <li>
+            <a
+              href="#/home"
+              class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+              >HOME</a
+            >
+          </li>
+          <li>
+            <a
+              href="#/story"
+              class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+              >STORY</a
+            >
+          </li>
+          <li>
+            <a
+              href="#/schedule"
+              class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+              >SCHEDULE</a
+            >
+          </li>
+          <li>
+            <a
+              href="#/party"
+              class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+              >PARTY</a
+            >
+          </li>
+          <li>
+            <a
+              href="#/gallery"
+              class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+              >GALLERY</a
+            >
+          </li>
+          <li>
+            <a
+              href="#/faq"
+              class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+              >FAQ</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Side Nav Overlay -->
+    <div
+      id="sideNavOverlay"
+      class="fixed inset-0 z-200 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300"
+    ></div>
+    <div
+      id="sideNav"
+      class="fixed top-0 right-0 z-300 h-full w-full bg-linear-to-b from-[#f5f0e8] to-[#e8ddd0] shadow-xl translate-x-full transition-transform duration-300"
+    >
+      <div class="flex items-center justify-between px-6 py-4 border-b">
+        <div class="font-[Reenie_Beanie] text-5xl leading-none">J & M</div>
+        <button
+          id="closeNavBtn"
+          class="w-10 h-10 flex items-center justify-center cursor-pointer"
+          aria-label="Close menu"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <ul
+        class="flex flex-col font-[Lato] font-light text-sm tracking-wider px-6 py-6 gap-6"
+      >
+        <li>
+          <a
+            href="#/home"
+            class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+            >HOME</a
+          >
+        </li>
+        <li>
+          <a
+            href="#/story"
+            class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+            >STORY</a
+          >
+        </li>
+        <li>
+          <a
+            href="#/schedule"
+            class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+            >SCHEDULE</a
+          >
+        </li>
+        <li>
+          <a
+            href="#/party"
+            class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+            >PARTY</a
+          >
+        </li>
+        <li>
+          <a
+            href="#/gallery"
+            class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+            >GALLERY</a
+          >
+        </li>
+        <li>
+          <a
+            href="#/faq"
+            class="nav-link hover:text-[#d4a574] transition-colors text-xl"
+            >FAQ</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Home Section -->
+    <section
+      id="home"
+      data-page="home"
+      class="page-section px-8 flex flex-col gap-10 justify-start items-center text-center"
+    >
+      <!-- Hero image -->
+      <div class="relative max-w-5xl w-full mx-auto mt-3">
+        <img src="assets/home-image.jpg" alt="Jared & Mackensie" class="w-full rounded-2xl shadow-lg" />
+        <div class="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/40 to-transparent"></div>
+        <div class="absolute bottom-6 md:bottom-10 left-0 right-0 text-center">
+          <h1 class="font-[Reenie_Beanie] text-6xl md:text-8xl text-white drop-shadow-lg">Jared & Mackensie</h1>
+          <p class="text-white/90 text-lg md:text-xl tracking-wider font-light mt-1 drop-shadow">December 11, 2026 &middot; Escondido, CA</p>
+        </div>
+      </div>
+
+      <!-- Decorative divider -->
+      <div class="flex items-center gap-4 w-full max-w-xs">
+        <div class="h-px bg-[#d4a574] flex-1"></div>
+        <div class="w-2 h-2 rounded-full bg-[#d4a574]"></div>
+        <div class="h-px bg-[#d4a574] flex-1"></div>
+      </div>
+
+      <!-- Countdown -->
+      <div class="max-w-2xl w-full mx-auto flex flex-col gap-5 items-center">
+        <p class="font-[Reenie_Beanie] text-4xl text-[#d4a574]">let the countdown begin</p>
+        <div class="flex items-center justify-center w-full gap-2 md:gap-3">
+          <div class="flex flex-col items-center">
+            <div class="rounded-xl bg-[#78201B] min-w-[72px] md:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-3">
+              <h3 class="countdown-element days font-semibold text-2xl md:text-3xl text-white text-center"></h3>
+              <p class="text-sm md:text-base font-light text-white/80 text-center">Days</p>
+            </div>
+          </div>
+          <span class="font-[Reenie_Beanie] text-3xl text-[#d4a574]">:</span>
+          <div class="flex flex-col items-center">
+            <div class="rounded-xl bg-[#78201B] min-w-[72px] md:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-3">
+              <h3 class="countdown-element hours font-semibold text-2xl md:text-3xl text-white text-center"></h3>
+              <p class="text-sm md:text-base font-light text-white/80 text-center">Hours</p>
+            </div>
+          </div>
+          <span class="font-[Reenie_Beanie] text-3xl text-[#d4a574]">:</span>
+          <div class="flex flex-col items-center">
+            <div class="rounded-xl bg-[#78201B] min-w-[72px] md:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-3">
+              <h3 class="countdown-element minutes font-semibold text-2xl md:text-3xl text-white text-center"></h3>
+              <p class="text-sm md:text-base font-light text-white/80 text-center">Minutes</p>
+            </div>
+          </div>
+          <span class="font-[Reenie_Beanie] text-3xl text-[#d4a574]">:</span>
+          <div class="flex flex-col items-center">
+            <div class="rounded-xl bg-[#78201B] min-w-[72px] md:min-w-[96px] flex items-center justify-center flex-col gap-1 aspect-square px-3">
+              <h3 class="countdown-element seconds font-semibold text-2xl md:text-3xl text-white text-center"></h3>
+              <p class="text-sm md:text-base font-light text-white/80 text-center">Seconds</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Our story -->
+    <section
+      id="story"
+      data-page="story"
+      class="page-section hidden pt-[102px] py-12 px-8 flex flex-col gap-12 justify-start items-center max-w-4xl mx-auto"
+    >
+      <div class="text-center">
+        <h1 class="text-4xl text-[#78201B]">Our Story</h1>
+        <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] mt-2">how it all began</p>
+      </div>
+
+      <!-- How We Met -->
+      <div class="w-full max-w-3xl">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">How We Met</p>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+        <div class="flex flex-col md:flex-row gap-8 items-center">
+          <div class="border border-[#d4a574]/30 rounded-2xl bg-white/50 p-8 flex-1">
+            <p class="text-gray-600 leading-relaxed">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text ever
+              since the 1500s, when an unknown printer took a galley of type and
+              scrambled it to make a type specimen book. It has survived not only
+              five centuries, but also the leap into electronic typesetting.
+            </p>
+          </div>
+          <img
+            src="https://picsum.photos/seed/story1/400/500"
+            alt="How we met"
+            class="rounded-2xl w-full max-w-[240px] object-cover aspect-[4/5]"
+          />
+        </div>
+      </div>
+
+      <!-- Decorative connector -->
+      <div class="flex flex-col items-center gap-1.5">
+        <div class="w-px h-6 bg-[#d4a574]/50"></div>
+        <div class="w-2 h-2 rounded-full bg-[#d4a574]"></div>
+        <div class="w-px h-6 bg-[#d4a574]/50"></div>
+      </div>
+
+      <!-- The Proposal -->
+      <div class="w-full max-w-3xl">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">The Proposal</p>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+        <div class="flex flex-col md:flex-row-reverse gap-8 items-center">
+          <div class="border border-[#d4a574]/30 rounded-2xl bg-white/50 p-8 flex-1">
+            <p class="text-gray-600 leading-relaxed">
+              Remaining essentially unchanged, it was popularised in the 1960s with
+              the release of Letraset sheets containing Lorem Ipsum passages, and
+              more recently with desktop publishing software like Aldus PageMaker
+              including versions of Lorem Ipsum. It has survived not only five
+              centuries, but also the leap into electronic typesetting.
+            </p>
+          </div>
+          <img
+            src="https://picsum.photos/seed/story2/400/500"
+            alt="The proposal"
+            class="rounded-2xl w-full max-w-[240px] object-cover aspect-[4/5]"
+          />
+        </div>
+      </div>
+
+      <!-- Decorative connector -->
+      <div class="flex flex-col items-center gap-1.5">
+        <div class="w-px h-6 bg-[#d4a574]/50"></div>
+        <div class="w-2 h-2 rounded-full bg-[#d4a574]"></div>
+        <div class="w-px h-6 bg-[#d4a574]/50"></div>
+      </div>
+
+      <!-- And Now... -->
+      <div class="w-full max-w-3xl">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">And Now</p>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+        <div class="border border-[#d4a574]/30 rounded-2xl bg-white/50 p-8 text-center">
+          <p class="text-gray-600 leading-relaxed">
+            And now, we're getting married! We can't wait to celebrate with all of
+            our favorite people on
+            <span class="font-[Reenie_Beanie] text-2xl text-[#78201B]">December 11th, 2026</span>
+            in Escondido, California.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schedule -->
+    <section
+      id="schedule"
+      data-page="schedule"
+      class="page-section hidden pt-[102px] py-12 px-8 flex flex-col gap-12 justify-start items-center max-w-4xl mx-auto"
+    >
+      <div class="text-center">
+        <h1 class="text-4xl text-[#78201B]">Schedule</h1>
+        <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] mt-2">a weekend of celebration</p>
+      </div>
+      <p class="text-center text-gray-600 max-w-lg">
+        Join us for a weekend of celebration in Escondido, California.
+      </p>
+
+      <!-- Day One -->
+      <div class="w-full max-w-2xl">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <div class="text-center shrink-0">
+            <p class="text-sm font-light tracking-widest uppercase text-[#d4a574]">Day One</p>
+            <h2 class="font-[Reenie_Beanie] text-5xl text-gray-800">December 10th</h2>
+          </div>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+
+        <div class="border border-[#d4a574]/30 rounded-2xl bg-white/50 p-8">
+          <div class="flex items-start gap-5">
+            <div class="flex flex-col items-center shrink-0">
+              <div class="w-10 h-10 rounded-full bg-[#78201B] flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800">Welcome Party</h3>
+              <p class="font-[Reenie_Beanie] text-2xl text-[#78201B] mt-1">6:00 PM</p>
+              <p class="text-gray-600 mt-2">
+                Kick off the wedding weekend with drinks, appetizers, and good company.
+                A casual evening to mingle and celebrate before the big day.
+              </p>
+              <p class="text-sm text-[#d4a574] mt-3 font-medium">Attire: Casual</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative connector -->
+      <div class="flex flex-col items-center gap-1.5">
+        <div class="w-px h-6 bg-[#d4a574]/50"></div>
+        <div class="w-2 h-2 rounded-full bg-[#d4a574]"></div>
+        <div class="w-px h-6 bg-[#d4a574]/50"></div>
+      </div>
+
+      <!-- Day Two -->
+      <div class="w-full max-w-2xl">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <div class="text-center shrink-0">
+            <p class="text-sm font-light tracking-widest uppercase text-[#d4a574]">Day Two</p>
+            <h2 class="font-[Reenie_Beanie] text-5xl text-gray-800">December 11th</h2>
+          </div>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <!-- Ceremony -->
+          <div class="border border-[#d4a574]/30 rounded-2xl bg-white/50 p-8">
+            <div class="flex items-start gap-5">
+              <div class="flex flex-col items-center shrink-0">
+                <div class="w-10 h-10 rounded-full bg-[#78201B] flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                  </svg>
+                </div>
+                <div class="w-px h-full bg-[#d4a574]/30 mt-2"></div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-800">Ceremony</h3>
+                <p class="font-[Reenie_Beanie] text-2xl text-[#78201B] mt-1">4:00 PM</p>
+                <p class="text-gray-600 mt-2">
+                  We invite you to witness as we say "I do." Please be seated by 3:45 PM.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cocktail Hour -->
+          <div class="border border-[#d4a574]/30 rounded-2xl bg-white/50 p-8">
+            <div class="flex items-start gap-5">
+              <div class="flex flex-col items-center shrink-0">
+                <div class="w-10 h-10 rounded-full bg-[#78201B] flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                  </svg>
+                </div>
+                <div class="w-px h-full bg-[#d4a574]/30 mt-2"></div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-800">Cocktail Hour</h3>
+                <p class="font-[Reenie_Beanie] text-2xl text-[#78201B] mt-1">5:00 PM</p>
+                <p class="text-gray-600 mt-2">
+                  Enjoy cocktails and hors d'oeuvres while we steal away for a few photos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reception -->
+          <div class="border border-[#d4a574]/30 rounded-2xl bg-white/50 p-8">
+            <div class="flex items-start gap-5">
+              <div class="flex flex-col items-center shrink-0">
+                <div class="w-10 h-10 rounded-full bg-[#78201B] flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-800">Reception</h3>
+                <p class="font-[Reenie_Beanie] text-2xl text-[#78201B] mt-1">6:00 PM</p>
+                <p class="text-gray-600 mt-2">
+                  Dinner, dancing, and celebration with our favorite people. Let's make it a night to remember!
+                </p>
+                <p class="text-sm text-[#d4a574] mt-3 font-medium">Attire: Semi-Formal</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wedding Party -->
+    <section
+      id="party"
+      data-page="party"
+      class="page-section hidden pt-[102px] py-12 px-8 flex flex-col gap-12 justify-start items-center text-center max-w-5xl mx-auto"
+    >
+      <div class="text-center">
+        <h1 class="text-4xl text-[#78201B]">Wedding Party</h1>
+        <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] mt-2">the ones standing by our side</p>
+      </div>
+
+      <!-- Two columns: Groomsmen & Bridesmaids -->
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-12">
+
+        <!-- Groomsmen -->
+        <div>
+          <div class="flex items-center gap-4 mb-8">
+            <div class="h-px bg-[#d4a574] flex-1"></div>
+            <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">Groomsmen</p>
+            <div class="h-px bg-[#d4a574] flex-1"></div>
+          </div>
+          <div class="flex flex-col gap-5">
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Joseph Sarchett</p>
+              <p class="text-sm text-[#78201B] font-medium">Best Man</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Spencer Rust</p>
+              <p class="text-sm text-[#78201B] font-medium">Best Man</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Kevin Fox</p>
+              <p class="text-sm text-[#d4a574]">Groomsman</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Patrick Everett</p>
+              <p class="text-sm text-[#d4a574]">Groomsman</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Nathan Hanson-Regalado</p>
+              <p class="text-sm text-[#d4a574]">Groomsman</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Kyle Hanson-Regalado</p>
+              <p class="text-sm text-[#d4a574]">Groomsman</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Jacob Hanson-Regalado</p>
+              <p class="text-sm text-[#d4a574]">Groomsman</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bridesmaids -->
+        <div>
+          <div class="flex items-center gap-4 mb-8">
+            <div class="h-px bg-[#d4a574] flex-1"></div>
+            <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">Bridesmaids</p>
+            <div class="h-px bg-[#d4a574] flex-1"></div>
+          </div>
+          <div class="flex flex-col gap-5">
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Mandy Nick</p>
+              <p class="text-sm text-[#78201B] font-medium">Maid of Honor</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Emma Phillips</p>
+              <p class="text-sm text-[#d4a574]">Bridesmaid</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Laura Pickl</p>
+              <p class="text-sm text-[#d4a574]">Bridesmaid</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Kristi Hedin</p>
+              <p class="text-sm text-[#d4a574]">Bridesmaid</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Eula</p>
+              <p class="text-sm text-[#d4a574]">Bridesmaid</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Claire</p>
+              <p class="text-sm text-[#d4a574]">Bridesmaid</p>
+            </div>
+            <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+              <p class="text-lg font-semibold text-gray-800">Maddy</p>
+              <p class="text-sm text-[#d4a574]">Bridesmaid</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Officiant -->
+      <div class="w-full max-w-sm">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">Officiant</p>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+        <div class="border border-[#d4a574]/30 rounded-xl bg-white/50 py-4 px-6">
+          <p class="text-lg font-semibold text-gray-800">Blake Yarbrough</p>
+          <p class="text-sm text-[#78201B] font-medium">Officiant & Groomsman</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section
+      id="gallery"
+      data-page="gallery"
+      class="page-section hidden pt-[102px] py-12 px-8 flex flex-col gap-8 justify-start items-center text-center max-w-6xl mx-auto"
+    >
+      <div class="text-center">
+        <h1 class="text-4xl text-[#78201B]">Gallery</h1>
+        <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] mt-2">our engagement</p>
+      </div>
+      <div class="w-full columns-2 md:columns-3 gap-4 space-y-4">
+        <img src="https://picsum.photos/seed/engage1/600/400" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+        <img src="https://picsum.photos/seed/engage2/400/600" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+        <img src="https://picsum.photos/seed/engage3/400/600" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+        <img src="https://picsum.photos/seed/engage4/600/400" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+        <img src="https://picsum.photos/seed/engage5/400/600" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+        <img src="https://picsum.photos/seed/engage6/600/400" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+        <img src="https://picsum.photos/seed/engage7/400/600" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+        <img src="https://picsum.photos/seed/engage8/600/400" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+        <img src="https://picsum.photos/seed/engage9/400/600" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+        <img src="https://picsum.photos/seed/engage10/600/400" alt="Engagement photo" class="w-full rounded-xl cursor-pointer hover:opacity-90 transition-opacity" />
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section
+      id="faq"
+      data-page="faq"
+      class="page-section hidden pt-[102px] py-12 px-8 flex flex-col gap-12 justify-start items-center max-w-3xl mx-auto"
+    >
+      <div class="text-center">
+        <h1 class="text-4xl text-[#78201B]">Questions & Answers</h1>
+        <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] mt-2">everything you need to know</p>
+      </div>
+
+      <div class="w-full flex flex-col gap-6">
+
+        <!-- The Details -->
+        <div class="flex items-center gap-4">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">The Details</p>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">Where is the wedding?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            The ceremony and reception will both take place in Escondido, California.
+            The full venue address and directions will be shared closer to the date.
+          </p>
+        </details>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">What time should I arrive?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            The ceremony begins at 4:00 PM on December 11th. We kindly ask that all guests
+            are seated by 3:45 PM. The welcome party on December 10th starts at 6:00 PM.
+          </p>
+        </details>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">Will the ceremony be indoors or outdoors?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            The ceremony will be outdoors. December evenings in Escondido can be cool,
+            so we recommend bringing a light jacket or wrap.
+          </p>
+        </details>
+
+        <!-- Dress Code & Guests -->
+        <div class="flex items-center gap-4 mt-4">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">Dress Code & Guests</p>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">What should I wear?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            The welcome party on December 10th is casual. The ceremony and reception on
+            December 11th are semi-formal. Think cocktail dresses and suits &mdash;
+            no need for a full tux, but leave the jeans at home.
+          </p>
+        </details>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">Can I bring a plus one?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            Due to venue capacity, we are only able to accommodate guests who are specifically
+            named on the invitation. If your invitation includes a plus one, it will be noted
+            on your RSVP.
+          </p>
+        </details>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">Are children welcome?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            While we love your little ones, our wedding will be an adults-only celebration.
+            We hope this gives you a great excuse for a night out!
+          </p>
+        </details>
+
+        <!-- Food & Drink -->
+        <div class="flex items-center gap-4 mt-4">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">Food & Drink</p>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">Will there be an open bar?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            Yes! We'll have a full open bar during cocktail hour and the reception.
+            Drink and be merry.
+          </p>
+        </details>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">What if I have dietary restrictions?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            We want to make sure everyone is well-fed! Please note any dietary restrictions
+            or allergies when you RSVP and we'll do our best to accommodate.
+          </p>
+        </details>
+
+        <!-- Logistics -->
+        <div class="flex items-center gap-4 mt-4">
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-[#d4a574] shrink-0">Logistics</p>
+          <div class="h-px bg-[#d4a574] flex-1"></div>
+        </div>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">Is there parking at the venue?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            Yes, there is complimentary parking available on-site. Additional details
+            will be provided as we get closer to the big day.
+          </p>
+        </details>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">Are there hotel recommendations nearby?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            We'll be sharing a hotel block with discounted rates for our guests soon.
+            Stay tuned for details!
+          </p>
+        </details>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">Can I take photos during the ceremony?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            We kindly ask for an unplugged ceremony &mdash; please put your phones and cameras
+            away while we exchange vows. Our photographer will capture every moment and we'll
+            share the photos with everyone afterward. Snap away at the reception!
+          </p>
+        </details>
+
+        <details class="group border border-[#d4a574]/30 rounded-2xl bg-white/50">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none">
+            <p class="text-lg font-semibold text-gray-800">When is the RSVP deadline?</p>
+            <svg class="w-5 h-5 text-[#d4a574] shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </summary>
+          <p class="text-gray-600 px-6 pb-6">
+            Please RSVP by <span class="font-[Reenie_Beanie] text-2xl text-[#78201B]">October 15th, 2026</span>.
+            This helps us finalize headcounts, seating, and catering. You can RSVP right on this
+            website through the <a href="#/rsvp" class="text-[#78201B] underline hover:text-[#d4a574] transition-colors">RSVP page</a>.
+          </p>
+        </details>
+
+      </div>
+
+      <!-- Bottom note -->
+      <div class="text-center mt-4">
+        <p class="text-gray-500">Still have questions? Reach out to us directly &mdash; we're happy to help.</p>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div
+      id="lightbox"
+      class="fixed inset-0 z-400 bg-black/90 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
+    >
+      <button
+        id="lightboxClose"
+        class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-white/70 hover:text-white cursor-pointer transition-colors"
+        aria-label="Close"
+      >
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <button
+        id="lightboxPrev"
+        class="absolute left-4 w-12 h-12 flex items-center justify-center text-white/70 hover:text-white cursor-pointer transition-colors"
+        aria-label="Previous"
+      >
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+      <img
+        id="lightboxImg"
+        class="max-h-[85vh] max-w-[90vw] rounded-lg object-contain"
+        src=""
+        alt="Gallery photo"
+      />
+      <button
+        id="lightboxNext"
+        class="absolute right-4 w-12 h-12 flex items-center justify-center text-white/70 hover:text-white cursor-pointer transition-colors"
+        aria-label="Next"
+      >
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
