@@ -147,7 +147,7 @@ if (heroSection) {
 // Function to apply visual effects based on progress (0 to 1)
 function applyHeroAnimationEffects(progress) {
   const endSize = 3.75; // rem (text-6xl, matches nav)
-  const startSize = window.innerWidth >= 768 ? 8 : 6; // rem
+  const startSize = window.innerWidth >= 768 ? 8 : window.innerWidth >= 640 ? 4.5 : 3; // rem (text-9xl md / text-7xl sm / text-5xl base)
 
     // --- Phase 1 (0–15%): Subtitle and flowers fade out ---
     if (heroSubtitle) {
