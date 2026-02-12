@@ -78,6 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Fresh domain.com visit — nav is fully hidden until animation completes
     hideNav();
     navigateToPage('home');
+    if (homeSection) homeSection.style.opacity = 0;
   } else if (window.location.hash === '#/home' || window.location.hash === '#/') {
     // Reload on #/home — skip to main content, no hero
     if (heroSection) {
@@ -144,6 +145,7 @@ const floatingTitle = document.getElementById('floatingTitle');
 const navLogo = document.getElementById('navLogo');
 const navLogoMobile = document.getElementById('navLogoMobile');
 const heroFadeSpans = document.querySelectorAll('.hero-fade');
+const homeSection = document.querySelector('[data-page="home"]');
 
 // Track if intro animation has completed or is playing
 let introCompleted = false;
@@ -169,9 +171,13 @@ function applyHeroAnimationEffects(progress) {
       heroSubtitle.style.opacity = subtitleFade;
     }
 
-    // Background (flowers) fade
-    const bgFade = Math.max(1 - progress * 2, 0.1);
+    // Background (flowers) fade — fully out by 50%
+    const bgFade = Math.max(1 - progress * 2, 0);
     heroSection.style.opacity = bgFade;
+    // Once hero is fully transparent, drop z-index so home content shows through
+    if (bgFade === 0) {
+      heroSection.style.zIndex = '0';
+    }
 
     // --- Phase 2 (10–30%): "ared" and "ackensie" fade out & collapse width ---
     const fadeStart = 0.1;
@@ -205,6 +211,18 @@ function applyHeroAnimationEffects(progress) {
       const t = (progress - shrinkStart) / (shrinkEnd - shrinkStart);
       const size = startSize - (startSize - endSize) * t;
       heroTitle.style.fontSize = size + 'rem';
+    }
+
+    // --- Home section fade in (50–85%): appears while logo floats to nav ---
+    if (homeSection) {
+      if (progress < 0.5) {
+        homeSection.style.opacity = 0;
+      } else if (progress >= 0.85) {
+        homeSection.style.opacity = 1;
+      } else {
+        const t = (progress - 0.5) / (0.85 - 0.5);
+        homeSection.style.opacity = t;
+      }
     }
 
     // --- Phase 4 (50–85%): Float "J & M" up into the actual nav logo position ---
