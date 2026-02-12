@@ -11,11 +11,21 @@ function hideHero() {
 }
 
 function showNav() {
-  navBar.classList.remove('-translate-y-full', 'opacity-0');
+  navBar.classList.remove('opacity-0', 'pointer-events-none');
 }
 
 function hideNav() {
-  navBar.classList.add('-translate-y-full', 'opacity-0');
+  navBar.classList.add('opacity-0', 'pointer-events-none');
+}
+
+function showNavLogo() {
+  if (navLogo) navLogo.style.opacity = '1';
+  if (navLogoMobile) navLogoMobile.style.opacity = '1';
+}
+
+function hideNavLogo() {
+  if (navLogo) navLogo.style.opacity = '0';
+  if (navLogoMobile) navLogoMobile.style.opacity = '0';
 }
 
 function navigateToPage(pageName) {
@@ -38,6 +48,7 @@ function navigateToPage(pageName) {
   } else {
     hideHero();
     showNav();
+    showNavLogo();
     window.scrollTo(0, 0);
   }
 
@@ -64,7 +75,8 @@ function handleRoute() {
 // On initial load
 window.addEventListener('DOMContentLoaded', () => {
   if (isIntro) {
-    // Fresh domain.com visit — play hero animations, hero is visible
+    // Fresh domain.com visit — nav is fully hidden until animation completes
+    hideNav();
     navigateToPage('home');
   } else if (window.location.hash === '#/home' || window.location.hash === '#/') {
     // Reload on #/home — skip to main content, no hero
@@ -74,10 +86,12 @@ window.addEventListener('DOMContentLoaded', () => {
       introCompleted = true;
     }
     showNav();
+    showNavLogo();
     navigateToPage('home');
   } else {
     // Reload on #/anything-else — no hero at all
     if (heroSection) heroSection.classList.add('no-animate');
+    showNavLogo();
     handleRoute();
   }
 });
@@ -193,50 +207,56 @@ function applyHeroAnimationEffects(progress) {
       heroTitle.style.fontSize = size + 'rem';
     }
 
-    // --- Phase 4 (50–85%): Switch to floating "J & M" and move to nav ---
+    // --- Phase 4 (50–85%): Float "J & M" up into the actual nav logo position ---
     const floatStart = 0.5;
     const floatEnd = 0.85;
 
+    // Get the real nav logo's position as our target
+    const targetLogo = window.innerWidth >= 768 ? navLogo : navLogoMobile;
+
     if (progress < floatStart) {
-      // Hero title visible, floating hidden
+      // Hero title visible, floating hidden, entire nav hidden
       heroTitle.style.visibility = 'visible';
       floatingTitle.style.opacity = 0;
+      hideNav();
     } else if (progress >= floatEnd) {
-      // Handoff complete: hide everything, show real nav
+      // Handoff complete: hide floating, reveal entire nav bar
       heroTitle.style.visibility = 'hidden';
       floatingTitle.style.opacity = 0;
       showNav();
-      
+      showNavLogo();
+
       // Mark intro as completed and transition to main content
       if (!introCompleted) {
         introCompleted = true;
-        // Smoothly transition to main content
         setTimeout(() => {
           heroSection.style.display = 'none';
           window.scrollTo(0, 0);
-          document.body.style.overflow = ''; // Re-enable scrolling
+          document.body.style.overflow = '';
         }, 100);
       }
     } else {
-      // Hide hero title, show floating and move it
+      // Hide hero title, show floating and move it toward nav logo
       heroTitle.style.visibility = 'hidden';
       floatingTitle.style.opacity = 1;
+      hideNav();
 
       const t = (progress - floatStart) / (floatEnd - floatStart);
       const ease = 1 - Math.pow(1 - t, 3); // ease-out cubic
 
-      // Start: where heroTitle currently is on screen
+      // Start: center of hero title on screen
       const heroRect = heroTitle.getBoundingClientRect();
       const startTop = heroRect.top + heroRect.height / 2;
       const startLeft = window.innerWidth / 2;
 
-      // End: where the nav logo sits
-      const endTop = window.innerWidth >= 768 ? 28 : 24;
-      const endLeft = window.innerWidth >= 768 ? window.innerWidth / 2 : 48;
+      // End: center of the actual nav logo element
+      const logoRect = targetLogo.getBoundingClientRect();
+      const endTop = logoRect.top + logoRect.height / 2;
+      const endLeft = logoRect.left + logoRect.width / 2;
 
       const currentTop = startTop + (endTop - startTop) * ease;
       const currentLeft = startLeft + (endLeft - startLeft) * ease;
-      const fontSize = endSize + (endSize * 0.1 * (1 - ease)); // slight shrink
+      const fontSize = endSize + (endSize * 0.1 * (1 - ease));
 
       floatingTitle.style.position = 'fixed';
       floatingTitle.style.top = currentTop + 'px';
@@ -244,11 +264,6 @@ function applyHeroAnimationEffects(progress) {
       floatingTitle.style.transform = 'translate(-50%, -50%)';
       floatingTitle.style.fontSize = fontSize + 'rem';
       floatingTitle.style.lineHeight = '1';
-    }
-
-    // Hide nav if not at the end
-    if (progress < floatEnd) {
-      hideNav();
     }
 }
 
@@ -311,6 +326,7 @@ if (heroSection) {
         if (heroSection.classList.contains('hidden')) return;
         if (!entry.isIntersecting) {
           showNav();
+          showNavLogo();
           floatingTitle.style.opacity = 0;
         }
       });
@@ -421,6 +437,7 @@ const lightboxPrev = document.getElementById('lightboxPrev');
 const lightboxNext = document.getElementById('lightboxNext');
 const galleryImages = document.querySelectorAll('#gallery img');
 let currentIndex = 0;
+let storyPhotoOpen = false;
 
 function openLightbox(index) {
   currentIndex = index;
@@ -432,6 +449,11 @@ function openLightbox(index) {
 function closeLightbox() {
   lightbox.classList.remove('opacity-100');
   lightbox.classList.add('opacity-0', 'pointer-events-none');
+  if (storyPhotoOpen) {
+    storyPhotoOpen = false;
+    lightboxPrev.classList.remove('hidden');
+    lightboxNext.classList.remove('hidden');
+  }
 }
 
 function showPrev() {
@@ -461,7 +483,20 @@ lightbox.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (lightbox.classList.contains('opacity-0')) return;
   if (e.key === 'Escape') closeLightbox();
+  if (storyPhotoOpen) return;
   if (e.key === 'ArrowLeft') showPrev();
   if (e.key === 'ArrowRight') showNext();
 });
 /////////// END LIGHTBOX LOGIC ///////////
+
+/////////// STORY PHOTO MODAL ///////////
+document.querySelectorAll('.story-photo').forEach((img) => {
+  img.addEventListener('click', () => {
+    storyPhotoOpen = true;
+    lightboxImg.src = img.src;
+    lightboxPrev.classList.add('hidden');
+    lightboxNext.classList.add('hidden');
+    lightbox.classList.remove('opacity-0', 'pointer-events-none');
+    lightbox.classList.add('opacity-100');
+  });
+});
