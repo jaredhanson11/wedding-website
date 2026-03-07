@@ -5,25 +5,12 @@
 }
 
 :root {
-    --color-green: #0E3E09;
-    --color-red: #902124;
-    --color-chartreuse: #BA9F38;
-    --color-pale-lime: #E1CC96;
-    --color-cabernet: #64242E;
-    --color-cinnamon-satin: #D46A79;
-    --color-apricot: #F6CBB6;
-    --color-red-chai: #632626;
-    --color-masala: #9D5353;
-    --color-wine: #4D0011;
-    --color-blush: #C2858C;
-
-    --background-color: 
-    --primary-color: #2c3e50;
-    --secondary-color: #e8d5c4;
-    --accent-color: #d4a574;
-    --text-color: #333;
-    --light-bg: #faf8f5;
-    --red-bg: #902124;
+    --background-color: #111111;
+    --primary-color: #f0f0f0;
+    --secondary-color: #2a2a2a;
+    --accent-color: #888888;
+    --text-color: #d1d5db;
+    --light-bg: #1c1c1c;
 }
 
 

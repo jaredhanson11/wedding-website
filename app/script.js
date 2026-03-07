@@ -149,11 +149,11 @@ function navigateToPage(pageName) {
   // Update active nav link
   const allLinks = document.querySelectorAll('.nav-link');
   allLinks.forEach(link => {
-    link.classList.remove('text-[#d4a574]', 'font-bold');
+    link.classList.remove('text-white', 'font-bold');
   });
   const activeLink = document.querySelector(`a[href="#/${pageName}"]`);
   if (activeLink) {
-    activeLink.classList.add('text-[#d4a574]', 'font-bold');
+    activeLink.classList.add('text-white', 'font-bold');
   }
 }
 
