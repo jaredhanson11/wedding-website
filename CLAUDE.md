@@ -4,55 +4,42 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Wedding website with a vanilla HTML/JS/CSS frontend and a Python FastAPI backend. RSVP data is stored in Google Sheets (no traditional database).
+Wedding website with a vanilla HTML/JS/CSS frontend and a Python FastAPI backend.
 
 ## Architecture
 
 **`app/`** — Static frontend (no build tools)
-- Single-page app with hash-based routing (`#/home`, `#/story`, `#/schedule`, `#/party`, `#/gallery`, `#/faq`, `#/rsvp`)
+
+- Single-page app with hash-based routing (`#/home`, `#/story`, `#/schedule`, `#/party`, `#/gallery`, `#/faq`)
 - Tailwind CSS 4 via CDN, Google Fonts (Lato, Reenie Beanie)
 - Pages are `div.page-section[data-page]` elements toggled via `navigateToPage()` in `script.js`
 
-**`api/`** — FastAPI backend
-- `__init__.py` — App setup, CORS, route handlers
-- `sheets.py` — Google Sheets integration via `gspread`. `SheetsService` is a singleton injected as a FastAPI dependency (`SheetsServiceDependency`)
-- `dtos.py` — Pydantic request/response models
-- Supports up to 6 guests per RSVP row. Sheet columns follow the pattern: `Name {n}`, `{n} Yes/No`, `{n} Dietary Restrictions`
+### Sections
 
-**API Endpoints:**
-- `POST /codes` — Look up guest by name, returns RSVP code
-- `GET /rsvps/{rsvp_id}` — Fetch RSVP data
-- `PUT /rsvps` — Submit/update RSVP
+**Hero** (`#hero`, fixed full-screen) — Intro animation shown on first load. Displays "Jared & Mackensie" in Reenie Beanie script with animated cosmo flower clusters in each corner and a location/date subtitle. On scroll, the title shrinks and flies up into the nav bar ("J & M" logo), revealing the main nav.
+
+**Home** (`#/home`) — Couple photo with name/date overlay, followed by an animated flip-digit countdown clock counting down to December 11, 2026.
+
+**Story** (`#/story`) — Narrative timeline of the couple's relationship told in four chapters: "The Early Days", "Some of Our Adventures", "The Proposal", and "And Now" — each pairing a photo with a text blurb.
+
+**Schedule** (`#/schedule`) — Two-day event breakdown. Day One (Dec 10): Welcome Party at 6PM. Day Two (Dec 11): Ceremony at 4PM, Cocktail Hour at 5PM, Reception at 6PM. Each day includes venue name, address, and a Google Maps directions link.
+
+**Party** (`#/party`) — Wedding party roster in two columns (Groomsmen / Bridesmaids) with roles, plus a separate Officiant card. Best Men: Joseph Sarchett & Spencer Rust. Maid of Honor: Mandy Nick. Officiant: Blake Yarbrough.
+
+**Gallery** (`#/gallery`) — Masonry-style photo grid of engagement photos (2-col mobile, 3-col desktop). Images are clickable.
+
+**FAQ** (`#/faq`) — Accordion or list of Q&A cards covering common guest questions.
 
 ## Development Commands
 
-### Backend API
-```bash
-cd api
-source venv/bin/activate
-python -m uvicorn __init__:app --reload
-```
-Runs at `http://0.0.0.0:8000`. API docs at `/docs` (Swagger).
-
-Requires `api/.env` with `GOOGLE_SHEETS_ID` and `GOOGLE_SHEETS_CREDENTIALS` (see `.env.example`).
-
 ### Frontend
-```bash
-cd app
-python -m http.server 8080
-```
 
-### Type Checking
-Pyright in "standard" mode (`pyrightconfig.json`). Python 3.13.
-
-### Install Dependencies
 ```bash
-cd api
-source venv/bin/activate
-pip install -r requirements.txt
+npx live-server app
 ```
 
 ## Color Palette
+
 - Primary: `#2c3e50` (dark blue-gray)
 - Secondary: `#e8d5c4` (warm beige)
 - Accent: `#d4a574` (gold)

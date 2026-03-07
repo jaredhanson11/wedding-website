@@ -18,45 +18,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="font-[Lato] bg-linear-to-br from-[#f5f0e8] to-[#e8ddd0]">
-    <!-- Hero Section -->
-    <section
-      id="hero"
-      class="fixed inset-0 flex items-center justify-center overflow-hidden border-b z-110"
-    >
-      <div class="animated-background">
-        <img src="assets/cosmo-cluster-1.png" class="flower-top-left" alt="" />
-        <img src="assets/cosmo-cluster-1.png" class="flower-top-right" alt="" />
-        <img
-          src="assets/cosmo-cluster-1.png"
-          class="flower-bottom-left"
-          alt=""
-        />
-        <img
-          src="assets/cosmo-cluster-1.png"
-          class="flower-bottom-right"
-          alt=""
-        />
-      </div>
-      <div class="relative z-10 text-center flex flex-col items-center justify-center gap-6 px-4">
-        <div id="heroTitle" class="font-[Reenie_Beanie] text-5xl sm:text-7xl md:text-9xl text-center hero-text-intro whitespace-nowrap max-w-full">
-          <span class="hero-keep">J</span><span class="hero-fade">ared</span>
-          <span class="hero-keep">&nbsp;&amp;&nbsp;</span>
-          <span class="hero-keep">M</span><span class="hero-fade">ackensie</span>
-        </div>
-        <div id="heroSubtitle" class="hero-text-intro hero-text-intro-delay">
-          <div class="text-base sm:text-xl md:text-2xl tracking-wider font-light">Escondido, CA</div>
-          <div class="text-base sm:text-xl md:text-2xl tracking-wider font-light">December 11, 2026</div>
-        </div>
-      </div>
-      </div>
-    </section>
-
-    <!-- Floating J & M for scroll-to-nav animation -->
-    <div
-      id="floatingTitle"
-      class="fixed z-150 font-[Reenie_Beanie] pointer-events-none opacity-0"
-      style="top: 50%; left: 50%; transform: translate(-50%, -50%)"
-    >J & M</div>
+    <!-- Hero Section — content injected by script.js based on ?style= (a/b/c) -->
+    <section id="hero" class="fixed inset-0 flex items-center justify-center overflow-hidden z-110"></section>
 
     <!-- Nav Bar -->
     <nav
@@ -215,7 +178,7 @@
     <section
       id="home"
       data-page="home"
-      class="page-section px-8 flex flex-col gap-10 justify-start items-center text-center"
+      class="page-section px-8 pb-12 flex flex-col gap-10 justify-start items-center text-center"
     >
       <!-- Hero image -->
       <div class="max-w-5xl w-full mx-auto mt-3">
