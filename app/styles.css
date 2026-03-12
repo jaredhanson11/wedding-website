@@ -71,8 +71,8 @@ details summary::-webkit-details-marker {
 /* Flip Clock Animation */
 .flip-digit-wrapper {
   position: relative;
-  width: 36px;
-  height: 54px;
+  width: 28px;
+  height: 42px;
   perspective: 400px;
 }
 
@@ -121,7 +121,7 @@ details summary::-webkit-details-marker {
 
 .flip-digit-top .digit-value,
 .flip-digit-bottom .digit-value {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #f5f5f5;
   line-height: 1;

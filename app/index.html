@@ -18,8 +18,43 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="font-[Lato] bg-[#111111] text-gray-100">
-    <!-- Hero Section — content injected by script.js based on ?style= (a/b/c) -->
-    <section id="hero" class="fixed inset-0 flex items-center justify-center overflow-hidden z-110"></section>
+    <!-- Hero Section -->
+    <section id="hero" class="fixed inset-0 overflow-hidden z-110 flex flex-col md:block" style="background: #0a0806;">
+      <!-- Photo: top block on narrow, full-cover on wide -->
+      <div class="relative shrink-0 w-full h-[45vh] md:absolute md:inset-0 md:h-full overflow-hidden">
+        <img src="assets/home-image.jpg" class="w-full h-full object-cover"
+          style="filter: grayscale(100%) brightness(0.5) contrast(1.15); object-position: center 25%;" alt="">
+        <!-- Narrow: fade bottom of photo into dark bg -->
+        <div class="md:hidden absolute inset-0" style="background: linear-gradient(to bottom, transparent 45%, #0a0806 100%)"></div>
+        <!-- Wide: vignette top and bottom -->
+        <div class="hidden md:block absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.05) 65%, rgba(0,0,0,0.8) 100%)"></div>
+      </div>
+      <!-- Text: below photo on narrow, centered overlay on wide -->
+      <div class="flex-1 flex flex-col items-center justify-center px-4 py-6 md:py-0 relative z-10 md:absolute md:inset-0">
+        <div class="text-center flex flex-col items-center gap-5">
+          <div class="hidden md:flex hero-text-intro items-center gap-3 w-40 sm:w-60">
+            <div class="h-px bg-white/30 flex-1"></div>
+            <div class="w-1.5 h-1.5 rotate-45 border border-white/30"></div>
+            <div class="h-px bg-white/30 flex-1"></div>
+          </div>
+          <div id="heroTitle" class="font-[Reenie_Beanie] text-6xl sm:text-8xl md:text-9xl text-white hero-text-intro whitespace-nowrap leading-none"><span class="hero-keep">J</span><span class="hero-fade">ared</span> <span class="hero-keep">&amp;</span> <span class="hero-keep">M</span><span class="hero-fade">ackensie</span></div>
+          <div id="heroSubtitle" class="hero-text-intro hero-text-intro-delay flex flex-col items-center gap-1.5">
+            <div class="text-white/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-light">12.11.2026 &nbsp;|&nbsp; San Diego, CA</div>
+          </div>
+          <div class="hidden md:flex hero-text-intro hero-text-intro-delay items-center gap-3 w-40 sm:w-60">
+            <div class="h-px bg-white/30 flex-1"></div>
+            <div class="w-1.5 h-1.5 rotate-45 border border-white/30"></div>
+            <div class="h-px bg-white/30 flex-1"></div>
+          </div>
+          <button id="heroEnterBtn" class="hero-enter-btn mt-4 flex flex-col items-center gap-2 cursor-pointer group">
+            <span class="text-white/40 group-hover:text-white/80 transition-colors duration-300 text-[9px] tracking-[0.55em] uppercase font-light">enter</span>
+            <svg class="w-4 h-4 text-white/30 group-hover:text-white/70 group-hover:translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
 
     <!-- Nav Bar -->
     <nav
@@ -192,7 +227,7 @@
         </div>
         <!-- Text below image on small screens -->
         <div class="text-center mt-6 md:hidden">
-          <h1 class="font-[Reenie_Beanie] text-6xl text-gray-100">Jared & Mackensie</h1>
+          <h1 class="font-[Reenie_Beanie] text-6xl sm:text-6xl text-gray-100 whitespace-nowrap">Jared & Mackensie</h1>
           <p class="text-gray-400 text-sm tracking-[0.3em] uppercase font-light mt-2">12.11.2026 &nbsp;|&nbsp; San Diego, CA</p>
         </div>
       </div>
