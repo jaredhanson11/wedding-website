@@ -430,7 +430,8 @@ let storyPhotoOpen = false;
 
 function openLightbox(index) {
   currentIndex = index;
-  lightboxImg.src = galleryImages[currentIndex].src;
+  const thumb = galleryImages[currentIndex];
+  lightboxImg.src = thumb.dataset.large || thumb.src;
   lightbox.classList.remove('opacity-0', 'pointer-events-none');
   lightbox.classList.add('opacity-100');
 }
@@ -447,12 +448,14 @@ function closeLightbox() {
 
 function showPrev() {
   currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-  lightboxImg.src = galleryImages[currentIndex].src;
+  const thumb = galleryImages[currentIndex];
+  lightboxImg.src = thumb.dataset.large || thumb.src;
 }
 
 function showNext() {
   currentIndex = (currentIndex + 1) % galleryImages.length;
-  lightboxImg.src = galleryImages[currentIndex].src;
+  const thumb = galleryImages[currentIndex];
+  lightboxImg.src = thumb.dataset.large || thumb.src;
 }
 
 galleryImages.forEach((img, i) => {
