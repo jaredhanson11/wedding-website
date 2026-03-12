@@ -38,8 +38,7 @@
           </div>
           <div id="heroTitle" class="font-[Reenie_Beanie] text-6xl sm:text-8xl md:text-9xl text-white hero-text-intro whitespace-nowrap leading-none"><span class="hero-keep">J</span><span class="hero-fade">ared</span> <span class="hero-keep">&amp;</span> <span class="hero-keep">M</span><span class="hero-fade">ackensie</span></div>
           <div id="heroSubtitle" class="hero-text-intro hero-text-intro-delay flex flex-col items-center gap-1.5">
-            <div class="text-white/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-light">Escondido, California</div>
-            <div class="text-white/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-light">December 11, 2026</div>
+            <div class="text-white/60 text-[10px] sm:text-xs tracking-[0.4em] uppercase font-light">12.11.2026 &nbsp;|&nbsp; San Diego, CA</div>
           </div>
           <div class="hidden md:flex hero-text-intro hero-text-intro-delay items-center gap-3 w-40 sm:w-60">
             <div class="h-px bg-white/30 flex-1"></div>
@@ -60,8 +59,7 @@
         <div id="heroTitle" class="font-[Reenie_Beanie] text-7xl sm:text-9xl text-white hero-text-intro whitespace-nowrap leading-none"><span class="hero-keep">J</span><span class="hero-fade">ared</span> <span class="hero-keep">&amp;</span> <span class="hero-keep">M</span><span class="hero-fade">ackensie</span></div>
         <div class="hero-text-intro hero-text-intro-delay w-20 h-px bg-white/15"></div>
         <div id="heroSubtitle" class="hero-text-intro hero-text-intro-delay flex flex-col items-center gap-2">
-          <div class="text-white/35 text-[9px] tracking-[0.5em] uppercase font-light">December 11, 2026</div>
-          <div class="text-white/35 text-[9px] tracking-[0.5em] uppercase font-light">Escondido, California</div>
+          <div class="text-white/35 text-[9px] tracking-[0.5em] uppercase font-light">12.11.2026 &nbsp;|&nbsp; San Diego, CA</div>
         </div>
         ${enterBtn}
       </div>`;
@@ -82,8 +80,7 @@
             <div id="heroTitle" class="font-[Reenie_Beanie] text-6xl sm:text-7xl md:text-8xl text-white hero-text-intro whitespace-nowrap leading-none"><span class="hero-keep">J</span><span class="hero-fade">ared</span> <span class="hero-keep">&amp;</span> <span class="hero-keep">M</span><span class="hero-fade">ackensie</span></div>
             <div class="hero-text-intro hero-text-intro-delay mt-5 w-12 h-px bg-white/20 mx-auto"></div>
             <div id="heroSubtitle" class="hero-text-intro hero-text-intro-delay mt-4 flex flex-col items-center gap-2">
-              <div class="text-white/45 text-[9px] sm:text-[10px] tracking-[0.45em] uppercase font-light">December 11, 2026</div>
-              <div class="text-white/45 text-[9px] sm:text-[10px] tracking-[0.45em] uppercase font-light">Escondido, California</div>
+              <div class="text-white/45 text-[9px] sm:text-[10px] tracking-[0.45em] uppercase font-light">12.11.2026 &nbsp;|&nbsp; San Diego, CA</div>
             </div>
             ${enterBtn}
           </div>
