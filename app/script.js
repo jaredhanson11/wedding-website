@@ -328,7 +328,7 @@ if (heroEnterBtn) {
 /////////// END HERO ENTER BUTTON LOGIC ///////////
 
 /////////// COUNTDOWN TIMER LOGIC ///////////
-let dest = new Date("dec 11, 2026 10:00:00").getTime();
+let dest = new Date("2026-12-11T15:30:00-08:00").getTime();
 
 // Store previous digit values to detect changes
 let previousDigits = {};
@@ -373,17 +373,27 @@ function updateCountdown() {
   let seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
   // Pad with zeros
-  let daysStr = String(days).padStart(2, '0');
+  let daysStr = String(days).padStart(3, '0');
   let hoursStr = String(hours).padStart(2, '0');
   let minutesStr = String(minutes).padStart(2, '0');
   let secondsStr = String(seconds).padStart(2, '0');
 
   // Update days
+  const daysHundreds = document.querySelector('.flip-digit[data-unit="days"][data-position="hundreds"]');
   const daysTens = document.querySelector('.flip-digit[data-unit="days"][data-position="tens"]');
   const daysOnes = document.querySelector('.flip-digit[data-unit="days"][data-position="ones"]');
+  if (days < 100 && daysHundreds) {
+    daysHundreds.parentElement.remove()
+  }
+
+  if (days >= 100 && daysHundreds) {
+    updateDigit(daysHundreds, daysStr[0]);
+  }
+
   if (daysTens && daysOnes) {
-    updateDigit(daysTens, daysStr[0]);
-    updateDigit(daysOnes, daysStr[1]);
+    updateDigit(daysHundreds, daysStr[0]);
+    updateDigit(daysTens, daysStr[1]);
+    updateDigit(daysOnes, daysStr[2]);
   }
 
   // Update hours
