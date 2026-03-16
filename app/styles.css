@@ -47,6 +47,15 @@
     animation: heroTextIn 1s ease-out 3.2s forwards;
 }
 
+.hero-bounce {
+    animation: heroBounce 2s ease-in-out 4.5s infinite;
+}
+
+@keyframes heroBounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(4px); }
+}
+
 /* Hero exit — slides up when Enter is clicked */
 #hero {
     transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);

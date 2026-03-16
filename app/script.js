@@ -230,6 +230,26 @@ function dismissHero() {
 if (heroEnterBtn) {
   heroEnterBtn.addEventListener('click', dismissHero);
 }
+
+// Scroll or swipe down to dismiss hero — enabled after intro animations complete (3.2s + 1s)
+let heroDismissed = false;
+let heroTouchStartY = 0;
+setTimeout(() => {
+  if (heroDismissed) return;
+  heroSection?.addEventListener('wheel', e => {
+    if (heroDismissed || e.deltaY <= 5) return;
+    heroDismissed = true;
+    dismissHero();
+  }, { passive: true });
+  heroSection?.addEventListener('touchstart', e => { heroTouchStartY = e.touches[0].clientY; }, { passive: true });
+  heroSection?.addEventListener('touchend', e => {
+    if (heroDismissed) return;
+    if (heroTouchStartY - e.changedTouches[0].clientY > 30) {
+      heroDismissed = true;
+      dismissHero();
+    }
+  }, { passive: true });
+}, 4200);
 /////////// END HERO ENTER BUTTON LOGIC ///////////
 
 /////////// COUNTDOWN TIMER LOGIC ///////////
