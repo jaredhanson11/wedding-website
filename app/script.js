@@ -263,16 +263,12 @@ function updateDigit(digitElement, newValue) {
   const currentValue = spans[0].textContent;
   
   if (currentValue !== newValue) {
-    // Update both top and bottom with new value
-    spans.forEach(span => {
-      span.textContent = newValue;
-    });
-    
-    // Trigger flip animation
+    // Trigger flip animation (both spans still show old value)
     digitElement.classList.add('flipping');
-    
-    // Remove flipping class after animation
+
+    // After animation completes, snap both to new value and reset
     setTimeout(() => {
+      spans.forEach(span => { span.textContent = newValue; });
       digitElement.classList.remove('flipping');
     }, 500);
   } else if (currentValue === '') {
