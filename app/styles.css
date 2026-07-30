@@ -77,6 +77,26 @@
 details summary::-webkit-details-marker {
     display: none;
 }
+/* Wedding venue map marker */
+.leaflet-div-icon.wedding-marker {
+  background: transparent;
+  border: none;
+}
+
+/* === VENUE MARKER SIZE (2 of 2) ===
+   Keep width/height equal to VENUE_SIZE in script.js. */
+.wedding-marker-badge {
+  width: 30px;
+  height: 30px;
+  background: #e0b83a;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.6);
+}
+
 /* Flip Clock Animation */
 .flip-digit-wrapper {
   position: relative;

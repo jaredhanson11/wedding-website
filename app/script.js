@@ -423,3 +423,164 @@ document.querySelectorAll('.story-photo').forEach((img) => {
     lightbox.classList.add('opacity-100');
   });
 });
+/////////// END STORY PHOTO MODAL ///////////
+
+/////////// TRAVEL MAP LOGIC ///////////
+const CATEGORY_COLORS = {
+  wedding: '#E0B83A',
+  airport: '#5B8DEF',
+  hotel: '#C9788F',
+  todo: '#6FA86B',
+};
+
+// lat/lng are approximate for an overview; each popup links to the exact
+// Google Maps search so directions are always precise.
+const MAP_LOCATIONS = [
+  // Wedding
+  { name: 'Ethereal Gardens (Venue)', cat: 'wedding', lat: 33.306, lng: -117.137, note: 'Ceremony & reception', q: 'Ethereal Gardens 8561 W Lilac Rd Escondido CA 92026', venue: true },
+  { name: 'Welcome Party', cat: 'wedding', lat: 33.4925, lng: -117.149, note: 'Old Town Temecula', q: 'Old Town Temecula' },
+  // Airports
+  { name: 'San Diego International (SAN)', cat: 'airport', lat: 32.7336, lng: -117.1897, note: 'Recommended', q: 'San Diego International Airport' },
+  { name: 'Carlsbad / McClellan-Palomar (CRQ)', cat: 'airport', lat: 33.1283, lng: -117.28, note: 'Closest, small', q: 'McClellan-Palomar Airport Carlsbad' },
+  // Orange County / John Wayne (SNA) is on the map but hidden from the initial
+  // view (it's far north and would skew the default San Diego-area zoom). It
+  // fades in as soon as the guest pans or zooms out to explore.
+  { name: 'Orange County / John Wayne (SNA)', cat: 'airport', lat: 33.6757, lng: -117.8682, note: 'Further north', q: 'John Wayne Airport', revealOnInteract: true },
+  // Hotels
+  { name: 'Pechanga Resort Casino', cat: 'hotel', lat: 33.4344, lng: -117.0876, note: "Where we're staying", q: 'Pechanga Resort Casino Temecula' },
+  { name: 'SpringHill Suites — Old Town', cat: 'hotel', lat: 33.503, lng: -117.153, note: 'More affordable', q: 'SpringHill Suites Temecula Old Town' },
+  { name: 'Temecula Creek Inn', cat: 'hotel', lat: 33.471, lng: -117.128, note: 'Quieter', q: 'Temecula Creek Inn' },
+  // Things to do
+  { name: 'San Diego Zoo', cat: 'todo', lat: 32.7353, lng: -117.149, note: 'Balboa Park', q: 'San Diego Zoo' },
+  { name: 'Safari Park', cat: 'todo', lat: 33.0986, lng: -116.9989, note: 'Near the venue', q: 'San Diego Zoo Safari Park' },
+  { name: 'Sunset Cliffs Natural Park', cat: 'todo', lat: 32.715, lng: -117.254, note: 'Point Loma', q: 'Sunset Cliffs Natural Park' },
+  { name: 'Torrey Pines Golf Course', cat: 'todo', lat: 32.8967, lng: -117.252, note: 'Golf', q: 'Torrey Pines Golf Course' },
+  { name: 'Pacific Beach', cat: 'todo', lat: 32.798, lng: -117.254, note: 'Beaches', q: 'Pacific Beach San Diego' },
+  { name: "Annie's Canyon Trail", cat: 'todo', lat: 33.005, lng: -117.264, note: 'Solana Beach', q: "Annie's Canyon Trail Solana Beach" },
+  { name: 'Temecula Wine Country', cat: 'todo', lat: 33.494, lng: -117.085, note: 'Near the venue', q: 'Temecula Wine Country' },
+];
+
+let travelMap = null;
+let travelMapBounds = null;
+
+function initTravelMap() {
+  const map = L.map('travelMap', { scrollWheelZoom: false }).setView(
+    [33.1, -117.15],
+    9
+  );
+
+  L.tileLayer(
+    'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      maxZoom: 19,
+    }
+  ).addTo(map);
+
+  // Custom gold badge + diamond-ring icon for the wedding venue
+  // === VENUE MARKER SIZE (1 of 2) ===
+  // To resize the venue marker, change VENUE_SIZE here AND the matching
+  // `.wedding-marker-badge` width/height in styles.css (keep the two equal).
+  const VENUE_SIZE = 30; // px — badge diameter
+  const VENUE_ICON = Math.round(VENUE_SIZE * 0.58); // px — ring icon inside
+
+  const weddingRingSvg = `<svg viewBox="0 0 24 24" width="${VENUE_ICON}" height="${VENUE_ICON}" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M7.5 3 H16.5 L20 7 L12 12.5 L4 7 Z" fill="#fff" />
+    <circle cx="12" cy="17" r="4.5" />
+  </svg>`;
+  const venueIcon = L.divIcon({
+    className: 'wedding-marker',
+    html: `<div class="wedding-marker-badge">${weddingRingSvg}</div>`,
+    iconSize: [VENUE_SIZE, VENUE_SIZE],
+    iconAnchor: [VENUE_SIZE / 2, VENUE_SIZE / 2],
+    popupAnchor: [0, -VENUE_SIZE / 2 - 2],
+  });
+
+  const boundPoints = [];
+  const hiddenMarkers = []; // revealed on first user interaction
+  MAP_LOCATIONS.forEach((loc) => {
+    const marker = loc.venue
+      ? L.marker([loc.lat, loc.lng], { icon: venueIcon, zIndexOffset: 1000 }).addTo(map)
+      : L.circleMarker([loc.lat, loc.lng], {
+          radius: loc.cat === 'wedding' ? 9 : 7,
+          color: '#fff',
+          weight: 2,
+          fillColor: CATEGORY_COLORS[loc.cat],
+          fillOpacity: 0.9,
+        }).addTo(map);
+
+    const q = encodeURIComponent(loc.q);
+    marker.bindPopup(
+      `<div style="min-width:150px;font-family:Lato,sans-serif">
+        <strong>${loc.name}</strong>
+        ${loc.note ? `<br><span style="color:#777">${loc.note}</span>` : ''}
+        <br><a href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">Directions ↗</a>
+      </div>`
+    );
+
+    if (loc.revealOnInteract) {
+      // Keep it out of the initial frame and invisible until the guest explores
+      marker.setStyle({ opacity: 0, fillOpacity: 0 });
+      hiddenMarkers.push(marker);
+    } else {
+      boundPoints.push([loc.lat, loc.lng]);
+    }
+  });
+
+  travelMapBounds = L.latLngBounds(boundPoints);
+
+  // Reveal the hidden markers the first time the user pans/zooms — but ignore
+  // our own programmatic fitBounds calls (which also fire zoom/move events).
+  let suppressReveal = false;
+  map.on('moveend zoomend', () => {
+    suppressReveal = false;
+  });
+  function revealHidden() {
+    if (suppressReveal) return;
+    hiddenMarkers.forEach((m) => m.setStyle({ opacity: 1, fillOpacity: 0.9 }));
+    map.off('dragstart', revealHidden);
+    map.off('zoomstart', revealHidden);
+  }
+  map.on('dragstart', revealHidden);
+  map.on('zoomstart', revealHidden);
+
+  // Expose a fit helper that flags its own movement as programmatic
+  map.fitTravelBounds = function () {
+    suppressReveal = true;
+    map.fitBounds(travelMapBounds, { padding: [40, 40] });
+  };
+
+  map.fitTravelBounds();
+  return map;
+}
+
+const mapToggleBtn = document.getElementById('mapToggleBtn');
+const mapToggleLabel = document.getElementById('mapToggleLabel');
+const travelMapWrap = document.getElementById('travelMapWrap');
+
+if (mapToggleBtn && travelMapWrap) {
+  mapToggleBtn.addEventListener('click', () => {
+    const willShow = travelMapWrap.classList.contains('hidden');
+
+    if (willShow) {
+      travelMapWrap.classList.remove('hidden');
+      mapToggleBtn.setAttribute('aria-expanded', 'true');
+      mapToggleLabel.textContent = 'Hide map';
+
+      if (typeof L === 'undefined') return; // Leaflet not loaded yet
+      if (!travelMap) travelMap = initTravelMap();
+
+      // Container was hidden when created — fix sizing once visible
+      setTimeout(() => {
+        travelMap.invalidateSize();
+        if (travelMap.fitTravelBounds) travelMap.fitTravelBounds();
+      }, 60);
+    } else {
+      travelMapWrap.classList.add('hidden');
+      mapToggleBtn.setAttribute('aria-expanded', 'false');
+      mapToggleLabel.textContent = 'Show map of all the spots';
+    }
+  });
+}
+/////////// END TRAVEL MAP LOGIC ///////////

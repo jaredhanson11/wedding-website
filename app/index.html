@@ -27,6 +27,19 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Leaflet (interactive map) -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+      defer
+    ></script>
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -160,83 +173,112 @@
       id="navBar"
       class="fixed z-100 top-0 w-full border-b border-white/10 bg-[#111111] transition-all duration-500"
     >
-      <!-- Mobile: logo + hamburger -->
-      <div class="flex items-center justify-between px-6 py-3 md:hidden">
+      <!-- Mobile: logo + RSVP CTA + hamburger -->
+      <div class="flex items-center justify-between px-6 py-3 lg:hidden">
         <div
           id="navLogoMobile"
           class="font-[Reenie_Beanie] text-6xl leading-none transition-opacity duration-300"
         >
           J & M
         </div>
-        <button
-          id="hamburgerBtn"
-          class="flex flex-col justify-center items-center gap-1.5 w-10 h-10 cursor-pointer"
-          aria-label="Open menu"
-        >
-          <span
-            class="hamburger-line block w-6 h-0.5 bg-gray-300 transition-all duration-300"
-          ></span>
-          <span
-            class="hamburger-line block w-6 h-0.5 bg-gray-300 transition-all duration-300"
-          ></span>
-          <span
-            class="hamburger-line block w-6 h-0.5 bg-gray-300 transition-all duration-300"
-          ></span>
-        </button>
+        <div class="flex items-center gap-3">
+          <a
+            href="#/rsvp"
+            class="nav-link whitespace-nowrap rounded-md bg-[#A4B42B] px-4 py-1.5 font-[Lato] text-xs font-semibold tracking-wider text-white hover:bg-[#8A9724] transition-colors"
+            >RSVP</a
+          >
+          <button
+            id="hamburgerBtn"
+            class="flex flex-col justify-center items-center gap-1.5 w-10 h-10 cursor-pointer"
+            aria-label="Open menu"
+          >
+            <span
+              class="hamburger-line block w-6 h-0.5 bg-gray-300 transition-all duration-300"
+            ></span>
+            <span
+              class="hamburger-line block w-6 h-0.5 bg-gray-300 transition-all duration-300"
+            ></span>
+            <span
+              class="hamburger-line block w-6 h-0.5 bg-gray-300 transition-all duration-300"
+            ></span>
+          </button>
+        </div>
       </div>
       <!-- Desktop: centered logo + horizontal links -->
-      <div class="hidden md:flex flex-col items-center px-10 gap-2">
+      <div class="hidden lg:flex flex-col items-center px-10 gap-2">
         <div
           id="navLogo"
           class="font-[Reenie_Beanie] text-6xl transition-opacity duration-300"
         >
           J & M
         </div>
-        <ul class="flex gap-8 font-[Lato] font-light text-sm tracking-wider">
+        <ul
+          class="flex flex-nowrap items-center font-[Lato] font-light tracking-wider gap-[clamp(0.85rem,1.8vw,2rem)] text-[clamp(0.95rem,1.25vw,1.25rem)]"
+        >
           <li>
             <a
               href="#/home"
-              class="nav-link hover:text-white transition-colors text-xl"
+              class="nav-link whitespace-nowrap hover:text-white transition-colors"
               >HOME</a
             >
           </li>
           <li>
             <a
               href="#/story"
-              class="nav-link hover:text-white transition-colors text-xl"
+              class="nav-link whitespace-nowrap hover:text-white transition-colors"
               >STORY</a
             >
           </li>
           <li>
             <a
               href="#/schedule"
-              class="nav-link hover:text-white transition-colors text-xl"
+              class="nav-link whitespace-nowrap hover:text-white transition-colors"
               >SCHEDULE</a
             >
           </li>
           <li>
             <a
               href="#/party"
-              class="nav-link hover:text-white transition-colors text-xl"
+              class="nav-link whitespace-nowrap hover:text-white transition-colors"
               >PARTY</a
             >
           </li>
           <li>
             <a
               href="#/gallery"
-              class="nav-link hover:text-white transition-colors text-xl"
+              class="nav-link whitespace-nowrap hover:text-white transition-colors"
               >GALLERY</a
             >
           </li>
           <li>
             <a
+              href="#/travel"
+              class="nav-link whitespace-nowrap hover:text-white transition-colors"
+              >TRAVEL</a
+            >
+          </li>
+          <li>
+            <a
+              href="#/registry"
+              class="nav-link whitespace-nowrap hover:text-white transition-colors"
+              >REGISTRY</a
+            >
+          </li>
+          <li>
+            <a
               href="#/faq"
-              class="nav-link hover:text-white transition-colors text-xl"
+              class="nav-link whitespace-nowrap hover:text-white transition-colors"
               >FAQ</a
             >
           </li>
         </ul>
       </div>
+      <!-- Desktop RSVP CTA (pinned right) -->
+      <a
+        href="#/rsvp"
+        class="nav-link hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md bg-[#A4B42B] px-6 py-2.5 font-[Lato] text-sm font-semibold tracking-wider text-white hover:bg-[#8A9724] transition-colors"
+        >RSVP</a
+      >
     </nav>
 
     <!-- Side Nav Overlay -->
@@ -246,10 +288,10 @@
     ></div>
     <div
       id="sideNav"
-      class="fixed top-0 right-0 z-300 h-full w-full bg-[#1a1a1a] shadow-xl translate-x-full transition-transform duration-300"
+      class="fixed top-0 right-0 z-300 h-full w-full bg-[#1a1a1a] shadow-xl translate-x-full transition-transform duration-300 flex flex-col"
     >
       <div
-        class="flex items-center justify-between px-6 py-4 border-b border-white/10"
+        class="shrink-0 flex items-center justify-between px-6 py-4 border-b border-white/10"
       >
         <div class="font-[Reenie_Beanie] text-5xl leading-none">J & M</div>
         <button
@@ -273,7 +315,7 @@
         </button>
       </div>
       <ul
-        class="flex flex-col font-[Lato] font-light text-sm tracking-wider px-6 py-6 gap-6"
+        class="flex-1 overflow-y-auto flex flex-col font-[Lato] font-light text-sm tracking-wider px-6 py-6 gap-6"
       >
         <li>
           <a
@@ -312,12 +354,33 @@
         </li>
         <li>
           <a
+            href="#/travel"
+            class="nav-link hover:text-white transition-colors text-xl"
+            >TRAVEL</a
+          >
+        </li>
+        <li>
+          <a
+            href="#/registry"
+            class="nav-link hover:text-white transition-colors text-xl"
+            >REGISTRY</a
+          >
+        </li>
+        <li>
+          <a
             href="#/faq"
             class="nav-link hover:text-white transition-colors text-xl"
             >FAQ</a
           >
         </li>
       </ul>
+      <div class="shrink-0 px-6 py-6 border-t border-white/10">
+        <a
+          href="#/rsvp"
+          class="nav-link block w-full text-center whitespace-nowrap rounded-md bg-[#A4B42B] px-6 py-3 font-[Lato] text-base font-semibold tracking-wider text-white hover:bg-[#8A9724] transition-colors"
+          >RSVP</a
+        >
+      </div>
     </div>
 
     <!-- Home Section -->
@@ -2006,6 +2069,724 @@
           >.
         </p>
       </div>
+    </section>
+
+    <!-- Travel Section (Where to Stay + Things to Do) -->
+    <section
+      id="travel"
+      data-page="travel"
+      class="page-section hidden pt-[102px] py-12 px-8 flex flex-col gap-12 justify-start items-center max-w-4xl mx-auto"
+    >
+      <div class="text-center">
+        <h1 class="text-4xl text-white">Travel</h1>
+        <p class="font-[Reenie_Beanie] text-3xl text-gray-400 mt-2">
+          everything you need for the trip
+        </p>
+      </div>
+
+      <!-- Map toggle + interactive map -->
+      <div class="w-full flex flex-col items-center gap-4">
+        <button
+          id="mapToggleBtn"
+          type="button"
+          class="inline-flex items-center gap-2 rounded-md border border-white/20 bg-white/5 px-5 py-2.5 font-[Lato] text-sm font-semibold tracking-wider text-gray-100 hover:bg-white/10 transition-colors cursor-pointer"
+          aria-expanded="false"
+          aria-controls="travelMapWrap"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 6.75 3.75 9v9.75L9 16.5m0-9.75 6 3.75m-6-3.75v9.75m6-6 5.25-2.25V14.25L15 16.5m0-9.75v9.75m0 0L9 16.5"
+            />
+          </svg>
+          <span id="mapToggleLabel">Show map of all the spots</span>
+        </button>
+
+        <div
+          id="travelMapWrap"
+          class="hidden w-full flex flex-col gap-3 overflow-hidden"
+        >
+          <div
+            id="travelMap"
+            class="w-full rounded-2xl border border-white/10 z-0"
+            style="height: min(70vh, 520px)"
+          ></div>
+          <!-- Legend -->
+          <div
+            class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-gray-400"
+          >
+            <span class="inline-flex items-center gap-1.5">
+              <span
+                class="w-3 h-3 rounded-full"
+                style="background: #e0b83a"
+              ></span>
+              Wedding
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <span
+                class="w-3 h-3 rounded-full"
+                style="background: #5b8def"
+              ></span>
+              Airports
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <span
+                class="w-3 h-3 rounded-full"
+                style="background: #c9788f"
+              ></span>
+              Hotels
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <span
+                class="w-3 h-3 rounded-full"
+                style="background: #6fa86b"
+              ></span>
+              Things to do
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Getting There -->
+      <div class="w-full flex flex-col gap-6">
+        <div class="flex items-center gap-4">
+          <div class="h-px bg-white/20 flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-gray-400 shrink-0">
+            Getting There
+          </p>
+          <div class="h-px bg-white/20 flex-1"></div>
+        </div>
+
+        <p class="text-gray-400 text-center max-w-2xl mx-auto">
+          We recommend flying into
+          <span class="text-gray-200 font-medium"
+            >San Diego International (SAN)</span
+          >
+          — it has the most flights and the easiest drive up to wine country.
+          The venue is rural, so plan to
+          <span class="text-gray-200 font-medium">rent a car</span>; rideshare
+          can be scarce out there, especially late at night. Drive times below
+          are rough estimates — the I-15 highway backs up on weekday afternoons,
+          so pad your schedule if you land during rush hour.
+        </p>
+
+        <!-- San Diego — Recommended -->
+        <div
+          class="border border-[#A4B42B]/50 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-4"
+        >
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-100">
+                San Diego International
+              </h3>
+              <p class="text-sm text-gray-400 mt-0.5">SAN · ~35 mi south</p>
+            </div>
+            <span
+              class="shrink-0 text-[10px] tracking-widest uppercase font-semibold text-[#A4B42B] border border-[#A4B42B]/60 rounded-full px-2.5 py-0.5"
+              >Recommended</span
+            >
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="rounded-xl bg-white/5 p-4">
+              <p class="text-xs uppercase tracking-widest text-gray-500">
+                To the venue · Escondido
+              </p>
+              <p class="text-gray-200 mt-1">
+                <span class="font-semibold">~40 min</span> no traffic
+              </p>
+              <p class="text-gray-400 text-sm">~55–65 min in rush hour</p>
+            </div>
+            <div class="rounded-xl bg-white/5 p-4">
+              <p class="text-xs uppercase tracking-widest text-gray-500">
+                To Old Town Temecula
+              </p>
+              <p class="text-gray-200 mt-1">
+                <span class="font-semibold">~60 min</span> no traffic
+              </p>
+              <p class="text-gray-400 text-sm">~80–95 min in rush hour</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Other airports -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <!-- Carlsbad -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-4"
+          >
+            <div>
+              <h3 class="text-xl font-semibold text-gray-100">
+                Carlsbad / McClellan-Palomar
+              </h3>
+              <p class="text-sm text-gray-400 mt-0.5">
+                CRQ · closest to the venue
+              </p>
+              <p class="text-gray-400 text-sm mt-2">
+                A small regional airport with limited service — worth a look if
+                a connecting flight lines up, but it won't have the fares or
+                frequency of SAN.
+              </p>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="rounded-xl bg-white/5 p-4">
+                <p class="text-xs uppercase tracking-widest text-gray-500">
+                  To the venue · Escondido
+                </p>
+                <p class="text-gray-200 mt-1">
+                  <span class="font-semibold">~25–30 min</span> no traffic
+                </p>
+                <p class="text-gray-400 text-sm">~35–40 min in rush hour</p>
+              </div>
+              <div class="rounded-xl bg-white/5 p-4">
+                <p class="text-xs uppercase tracking-widest text-gray-500">
+                  To Old Town Temecula
+                </p>
+                <p class="text-gray-200 mt-1">
+                  <span class="font-semibold">~45 min</span> no traffic
+                </p>
+                <p class="text-gray-400 text-sm">~55–60 min in rush hour</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Orange County -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-4"
+          >
+            <div>
+              <h3 class="text-xl font-semibold text-gray-100">
+                Orange County / John Wayne
+              </h3>
+              <p class="text-sm text-gray-400 mt-0.5">SNA · ~65 mi north</p>
+              <p class="text-gray-400 text-sm mt-2">
+                Another option to check airfare prices — just note it's a longer
+                drive and traffic through Orange County can be unpredictable.
+              </p>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="rounded-xl bg-white/5 p-4">
+                <p class="text-xs uppercase tracking-widest text-gray-500">
+                  To the venue · Escondido
+                </p>
+                <p class="text-gray-200 mt-1">
+                  <span class="font-semibold">~70 min</span> no traffic
+                </p>
+                <p class="text-gray-400 text-sm">~90–110 min in rush hour</p>
+              </div>
+              <div class="rounded-xl bg-white/5 p-4">
+                <p class="text-xs uppercase tracking-widest text-gray-500">
+                  To Old Town Temecula
+                </p>
+                <p class="text-gray-200 mt-1">
+                  <span class="font-semibold">~65 min</span> no traffic
+                </p>
+                <p class="text-gray-400 text-sm">~85–100 min in rush hour</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Where to Stay -->
+      <div class="w-full flex flex-col gap-6">
+        <div class="flex items-center gap-4">
+          <div class="h-px bg-white/20 flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-gray-400 shrink-0">
+            Where to Stay
+          </p>
+          <div class="h-px bg-white/20 flex-1"></div>
+        </div>
+
+        <p class="text-gray-400 text-center max-w-2xl mx-auto">
+          There's a wide range of places to stay around Temecula — here are a
+          few we'd point you toward, from where we'll be to more budget-friendly
+          and quieter options.
+        </p>
+
+        <!-- Pechanga — where we're staying -->
+        <div
+          class="border border-[#A4B42B]/50 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-3"
+        >
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-100">
+                Pechanga Resort Casino
+              </h3>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Pechanga+Resort+Casino+Temecula"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 w-fit text-xs uppercase tracking-widest text-gray-500 hover:text-gray-300 transition-colors mt-0.5"
+              >
+                <svg
+                  class="w-3.5 h-3.5 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                  />
+                </svg>
+                Temecula
+              </a>
+            </div>
+            <span
+              class="shrink-0 text-[10px] tracking-widest uppercase font-semibold text-[#A4B42B] border border-[#A4B42B]/60 rounded-full px-2.5 py-0.5"
+              >Where we're staying</span
+            >
+          </div>
+          <p class="text-gray-400 text-sm">
+            A lively resort, with a full casino, golf course, restaurants, and
+            live music. We'll be staying here, so it's the easiest place to keep
+            to continue celebrating after the wedding.
+          </p>
+          <p class="text-sm text-gray-300">
+            <span class="text-[#A4B42B] font-semibold">Tip:</span> 10% off for
+            AAA members, military, and emergency personnel.
+          </p>
+          <a
+            href="https://www.pechanga.com/stay/packages/stay-longer-and-save"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 w-fit rounded-md bg-[#A4B42B] px-5 py-2.5 font-[Lato] text-sm font-semibold tracking-wider text-white hover:bg-[#8A9724] transition-colors mt-1"
+          >
+            Book the Stay &amp; Save rate — 20% off
+            <svg
+              class="w-3.5 h-3.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Alternatives -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <!-- SpringHill Suites -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-2"
+          >
+            <h3 class="text-lg font-semibold text-gray-100">
+              SpringHill Suites — Old Town
+            </h3>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=SpringHill+Suites+Temecula+Old+Town"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 w-fit text-xs uppercase tracking-widest text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <svg
+                class="w-3.5 h-3.5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              Old Town Temecula
+            </a>
+            <p class="text-gray-400 text-sm mt-1">
+              A more affordable, modern option right in Old Town — walkable to
+              restaurants and bars, and close to where the welcome party will
+              be.
+            </p>
+          </div>
+
+          <!-- Temecula Creek Inn -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-2"
+          >
+            <h3 class="text-lg font-semibold text-gray-100">
+              Temecula Creek Inn
+            </h3>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Temecula+Creek+Inn"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 w-fit text-xs uppercase tracking-widest text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <svg
+                class="w-3.5 h-3.5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              Temecula · near Pechanga
+            </a>
+            <p class="text-gray-400 text-sm mt-1">
+              A quieter alternative just minutes from Pechanga — a laid-back
+              golf-resort setting if you'd rather wind down at the end of the
+              night.
+            </p>
+          </div>
+        </div>
+
+        <p class="text-gray-400 text-sm text-center max-w-2xl mx-auto">
+          <span class="text-[#A4B42B] font-semibold">Heads up:</span> wherever
+          you decide to stay, budget in extra drive time — northbound traffic is
+          at its worst in the afternoon and evening.
+        </p>
+      </div>
+
+      <!-- Things to Do -->
+      <div class="w-full flex flex-col gap-6">
+        <div class="flex items-center gap-4">
+          <div class="h-px bg-white/20 flex-1"></div>
+          <p class="font-[Reenie_Beanie] text-3xl text-gray-400 shrink-0">
+            Things to Do
+          </p>
+          <div class="h-px bg-white/20 flex-1"></div>
+        </div>
+
+        <p class="text-gray-400 text-center max-w-2xl mx-auto">
+          A few of our favorite ways to spend a day around San Diego — plus
+          something close to the venue if you'd rather stay near wine country.
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <!-- San Diego Zoo & Safari Park -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-2"
+          >
+            <h3 class="text-lg font-semibold text-gray-100">
+              San Diego Zoo &amp; Safari Park
+            </h3>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=San+Diego+Zoo"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 w-fit text-xs uppercase tracking-widest text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <svg
+                class="w-3.5 h-3.5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              Balboa Park &amp; Escondido
+            </a>
+            <p class="text-gray-400 text-sm mt-1">
+              The world-famous zoo in Balboa Park, plus its Safari Park up in
+              Escondido — a short drive from the venue.
+              <span class="italic"
+                >A favorite of ours; we were season pass holders for
+                years.</span
+              >
+            </p>
+            <p class="text-sm text-gray-300 mt-1">
+              <span class="text-[#A4B42B] font-semibold">Tip:</span> 10% off
+              single-day passes with AAA.
+            </p>
+          </div>
+
+          <!-- Sunset Cliffs Natural Park -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-2"
+          >
+            <h3 class="text-lg font-semibold text-gray-100">
+              Sunset Cliffs Natural Park
+            </h3>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Sunset+Cliffs+Natural+Park"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 w-fit text-xs uppercase tracking-widest text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <svg
+                class="w-3.5 h-3.5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              Point Loma
+            </a>
+            <p class="text-gray-400 text-sm mt-1">
+              A picturesque walk along the bluffs at the edge of the Pacific —
+              best at golden hour, and not too far from our old stomping
+              grounds.
+            </p>
+          </div>
+
+          <!-- Golf -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-2"
+          >
+            <h3 class="text-lg font-semibold text-gray-100">Golf</h3>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Torrey+Pines+Golf+Course"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 w-fit text-xs uppercase tracking-widest text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <svg
+                class="w-3.5 h-3.5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              All over San Diego
+            </a>
+            <p class="text-gray-400 text-sm mt-1">
+              San Diego is packed with great courses. The crown jewel is Torrey
+              Pines, perched right on the coast.
+            </p>
+            <p class="text-sm text-gray-300 mt-1">
+              <span class="text-[#A4B42B] font-semibold">Tip:</span> Torrey
+              Pines tee times go fast — book about 3 months ahead.
+            </p>
+          </div>
+
+          <!-- Beaches -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-2"
+          >
+            <h3 class="text-lg font-semibold text-gray-100">Beaches</h3>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Pacific+Beach+San+Diego"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 w-fit text-xs uppercase tracking-widest text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <svg
+                class="w-3.5 h-3.5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              Pacific Beach
+            </a>
+            <p class="text-gray-400 text-sm mt-1">
+              Miles of coastline to choose from — our pick is Pacific Beach,
+              with a lively boardwalk and plenty of spots to eat and drink right
+              on the sand.
+            </p>
+          </div>
+
+          <!-- Annie's Canyon Trail -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-2"
+          >
+            <h3 class="text-lg font-semibold text-gray-100">
+              Annie's Canyon Trail
+            </h3>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Annie%27s+Canyon+Trail+Solana+Beach"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 w-fit text-xs uppercase tracking-widest text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <svg
+                class="w-3.5 h-3.5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              Solana Beach
+            </a>
+            <p class="text-gray-400 text-sm mt-1">
+              A short but moderate 0.75-mile hike through naturally carved slot
+              canyons in the San Elijo Lagoon Ecological Reserve.
+            </p>
+          </div>
+
+          <!-- Temecula Wine Country (near the venue) -->
+          <div
+            class="border border-white/10 rounded-2xl bg-[#1c1c1c] p-6 flex flex-col gap-2"
+          >
+            <h3 class="text-lg font-semibold text-gray-100">
+              Temecula Wine Country
+            </h3>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Temecula+Wine+Country"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 w-fit text-xs uppercase tracking-widest text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <svg
+                class="w-3.5 h-3.5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              Near the venue
+            </a>
+            <p class="text-gray-400 text-sm mt-1">
+              Right by the welcome party and a short drive from the venue —
+              dozens of wineries with tasting rooms and patios looking out over
+              the vines. Easy to make a relaxed morning or afternoon of it.
+            </p>
+            <p class="text-sm text-gray-300 mt-1">
+              <span class="text-[#A4B42B] font-semibold">Tip:</span> Many
+              tasting rooms take reservations on weekends — book ahead.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registry Section -->
+    <section
+      id="registry"
+      data-page="registry"
+      class="page-section hidden pt-[102px] py-12 px-8 flex flex-col gap-12 justify-start items-center max-w-4xl mx-auto"
+    >
+      <div class="text-center">
+        <h1 class="text-4xl text-white">Registry</h1>
+        <p class="font-[Reenie_Beanie] text-3xl text-gray-400 mt-2">
+          your presence is the only present we need
+        </p>
+      </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section
+      id="rsvp"
+      data-page="rsvp"
+      class="page-section hidden pt-[102px] py-12 px-8 flex flex-col gap-8 justify-start items-center w-full max-w-4xl mx-auto"
+    >
+      <div class="text-center">
+        <h1 class="text-4xl text-white">RSVP</h1>
+        <p class="font-[Reenie_Beanie] text-3xl text-gray-400 mt-2">
+          let us know you're coming
+        </p>
+      </div>
+
+      <!-- Embedded WithJoy RSVP -->
+      <iframe
+        src="https://withjoy.com/jared-and-mackensie/rsvp"
+        title="RSVP"
+        class="w-full rounded-2xl border border-white/10 bg-white"
+        style="height: min(80vh, 900px)"
+        loading="lazy"
+      ></iframe>
+
+      <p class="text-sm text-gray-400 text-center">
+        Having trouble?
+        <a
+          href="https://withjoy.com/jared-and-mackensie/rsvp"
+          target="_blank"
+          rel="noopener"
+          class="underline hover:text-white transition-colors"
+          >Open the RSVP form in a new tab</a
+        >.
+      </p>
     </section>
 
     <!-- Lightbox -->
