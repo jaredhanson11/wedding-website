@@ -438,7 +438,7 @@ const CATEGORY_COLORS = {
 const MAP_LOCATIONS = [
   // Wedding
   { name: 'Ethereal Gardens (Venue)', cat: 'wedding', lat: 33.306, lng: -117.137, note: 'Ceremony & reception', q: 'Ethereal Gardens 8561 W Lilac Rd Escondido CA 92026', venue: true },
-  { name: 'Welcome Party', cat: 'wedding', lat: 33.4925, lng: -117.149, note: 'Old Town Temecula', q: 'Old Town Temecula' },
+  { name: 'Welcome Party — Blackbird Tavern', cat: 'wedding', lat: 33.4936, lng: -117.1503, note: 'Old Town Temecula', q: 'Blackbird Tavern 41958 5th St Temecula CA 92590' },
   // Airports
   { name: 'San Diego International (SAN)', cat: 'airport', lat: 32.7336, lng: -117.1897, note: 'Recommended', q: 'San Diego International Airport' },
   { name: 'Carlsbad / McClellan-Palomar (CRQ)', cat: 'airport', lat: 33.1283, lng: -117.28, note: 'Closest, small', q: 'McClellan-Palomar Airport Carlsbad' },
@@ -455,7 +455,7 @@ const MAP_LOCATIONS = [
   { name: 'Safari Park', cat: 'todo', lat: 33.0986, lng: -116.9989, note: 'Near the venue', q: 'San Diego Zoo Safari Park' },
   { name: 'Sunset Cliffs Natural Park', cat: 'todo', lat: 32.715, lng: -117.254, note: 'Point Loma', q: 'Sunset Cliffs Natural Park' },
   { name: 'Torrey Pines Golf Course', cat: 'todo', lat: 32.8967, lng: -117.252, note: 'Golf', q: 'Torrey Pines Golf Course' },
-  { name: 'Pacific Beach', cat: 'todo', lat: 32.798, lng: -117.254, note: 'Beaches', q: 'Pacific Beach San Diego' },
+  { name: 'La Jolla Beaches', cat: 'todo', lat: 32.8503, lng: -117.2721, note: 'Beaches', q: 'La Jolla Cove San Diego' },
   { name: "Annie's Canyon Trail", cat: 'todo', lat: 33.005, lng: -117.264, note: 'Solana Beach', q: "Annie's Canyon Trail Solana Beach" },
   { name: 'Temecula Wine Country', cat: 'todo', lat: 33.494, lng: -117.085, note: 'Near the venue', q: 'Temecula Wine Country' },
 ];
