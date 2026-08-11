@@ -65,9 +65,13 @@ function navigateToPage(pageName) {
 // Determine if this is a fresh visit (no hash) — the intro experience
 const isIntro = !window.location.hash;
 
+// Pages temporarily hidden from the site (links commented out in index.html)
+const hiddenPages = ['rsvp', 'registry'];
+
 function handleRoute() {
   const hash = window.location.hash.slice(2); // Remove '#/' from hash
-  const page = hash || 'home';
+  let page = hash || 'home';
+  if (hiddenPages.includes(page)) page = 'home';
   navigateToPage(page);
 }
 
