@@ -10,7 +10,7 @@ Wedding website with a vanilla HTML/JS/CSS frontend (`app/`) and a Python FastAP
 
 **`app/`** — Static frontend (no build tools)
 
-- Single-page app with hash-based routing (`#/home`, `#/story`, `#/schedule`, `#/party`, `#/gallery`, `#/travel`, `#/faq`; `#/rsvp` and `#/registry` exist but are temporarily hidden)
+- Single-page app with hash-based routing (`#/home`, `#/story`, `#/schedule`, `#/party`, `#/gallery`, `#/travel`, `#/rsvp`, `#/faq`; `#/registry` exists but is temporarily hidden)
 - Tailwind CSS 4 via CDN, Google Fonts (Lato, Reenie Beanie), Leaflet for the travel map, Google Analytics (gtag)
 - Pages are `div.page-section[data-page]` elements toggled via `navigateToPage()` in `script.js`
 
@@ -35,9 +35,9 @@ Wedding website with a vanilla HTML/JS/CSS frontend (`app/`) and a Python FastAP
 
 **FAQ** (`#/faq`) — `<details>` accordion cards grouped under The Details, Dress Code & Guests, Food & Drink, and Logistics. Contact email: mackensie.wedding@gmail.com.
 
-**RSVP** (`#/rsvp`) — **Hidden for now.** Embedded WithJoy RSVP iframe. Nav links/CTA buttons are commented out in `index.html`, and `hiddenPages` in `script.js` redirects direct links to home. Remove the entries from `hiddenPages` and un-comment the nav links to re-enable.
+**RSVP** (`#/rsvp`) — Embedded WithJoy RSVP iframe, with a fallback link to open the form in a new tab. RSVP CTA buttons appear in the mobile nav bar, desktop nav bar (pinned right), and the slide-out menu.
 
-**Registry** (`#/registry`) — **Hidden for now** (same mechanism as RSVP). Placeholder content only.
+**Registry** (`#/registry`) — **Hidden for now.** Placeholder content only. Nav links are commented out in `index.html`, and `hiddenPages` in `script.js` redirects direct links to home. Remove `'registry'` from `hiddenPages` and un-comment the nav links to re-enable.
 
 ## Development Commands
 
