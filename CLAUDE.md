@@ -10,7 +10,7 @@ Wedding website with a vanilla HTML/JS/CSS frontend (`app/`) and a Python FastAP
 
 **`app/`** — Static frontend (no build tools)
 
-- Single-page app with hash-based routing (`#/home`, `#/story`, `#/schedule`, `#/party`, `#/gallery`, `#/travel`, `#/rsvp`, `#/faq`; `#/registry` exists but is temporarily hidden)
+- Single-page app with hash-based routing (`#/home`, `#/story`, `#/schedule`, `#/party`, `#/gallery`, `#/travel`, `#/rsvp`, `#/faq`, `#/registry`)
 - Tailwind CSS 4 via CDN, Google Fonts (Lato, Reenie Beanie), Leaflet for the travel map, Google Analytics (gtag)
 - Pages are `div.page-section[data-page]` elements toggled via `navigateToPage()` in `script.js`
 
@@ -37,7 +37,7 @@ Wedding website with a vanilla HTML/JS/CSS frontend (`app/`) and a Python FastAP
 
 **RSVP** (`#/rsvp`) — RSVP deadline is October 11, 2026 (invitations sent September 2026; stated on the RSVP page and in the FAQ). Embedded WithJoy RSVP iframe, with a fallback link to open the form in a new tab. RSVP CTA buttons appear in the mobile nav bar, desktop nav bar (pinned right), and the slide-out menu.
 
-**Registry** (`#/registry`) — **Hidden for now.** Placeholder content only. Nav links are commented out in `index.html`, and `hiddenPages` in `script.js` redirects direct links to home. Remove `'registry'` from `hiddenPages` and un-comment the nav links to re-enable.
+**Registry** (`#/registry`) — Two cards linking out to the Amazon and Crate & Barrel registries. `hiddenPages` in `script.js` (currently empty) can hide a page again by redirecting its route to home.
 
 ## Development Commands
 

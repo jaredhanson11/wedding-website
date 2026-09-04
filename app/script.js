@@ -66,7 +66,7 @@ function navigateToPage(pageName) {
 const isIntro = !window.location.hash;
 
 // Pages temporarily hidden from the site (links commented out in index.html)
-const hiddenPages = ['registry'];
+const hiddenPages = [];
 
 function handleRoute() {
   const hash = window.location.hash.slice(2); // Remove '#/' from hash
