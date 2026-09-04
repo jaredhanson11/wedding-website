@@ -35,7 +35,7 @@ Wedding website with a vanilla HTML/JS/CSS frontend (`app/`) and a Python FastAP
 
 **FAQ** (`#/faq`) — `<details>` accordion cards grouped under The Details, Dress Code & Guests, Food & Drink, and Logistics. Contact email: mackensie.wedding@gmail.com.
 
-**RSVP** (`#/rsvp`) — Embedded WithJoy RSVP iframe, with a fallback link to open the form in a new tab. RSVP CTA buttons appear in the mobile nav bar, desktop nav bar (pinned right), and the slide-out menu.
+**RSVP** (`#/rsvp`) — RSVP deadline is October 11, 2026 (invitations sent September 2026; stated on the RSVP page and in the FAQ). Embedded WithJoy RSVP iframe, with a fallback link to open the form in a new tab. RSVP CTA buttons appear in the mobile nav bar, desktop nav bar (pinned right), and the slide-out menu.
 
 **Registry** (`#/registry`) — **Hidden for now.** Placeholder content only. Nav links are commented out in `index.html`, and `hiddenPages` in `script.js` redirects direct links to home. Remove `'registry'` from `hiddenPages` and un-comment the nav links to re-enable.
 

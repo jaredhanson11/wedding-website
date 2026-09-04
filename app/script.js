@@ -452,7 +452,7 @@ const MAP_LOCATIONS = [
   { name: 'Orange County / John Wayne (SNA)', cat: 'airport', lat: 33.6757, lng: -117.8682, note: 'Further north', q: 'John Wayne Airport', revealOnInteract: true },
   // Hotels
   { name: 'Pechanga Resort Casino', cat: 'hotel', lat: 33.4344, lng: -117.0876, note: "Where we're staying", q: 'Pechanga Resort Casino Temecula' },
-  { name: 'SpringHill Suites — Old Town', cat: 'hotel', lat: 33.503, lng: -117.153, note: 'More affordable', q: 'SpringHill Suites Temecula Old Town' },
+  { name: 'SpringHill Suites by Marriott', cat: 'hotel', lat: 33.5022, lng: -117.1532, note: 'Room block', q: 'SpringHill Suites by Marriott Temecula Valley Wine Country' },
   { name: 'Temecula Creek Inn', cat: 'hotel', lat: 33.471, lng: -117.128, note: 'Quieter', q: 'Temecula Creek Inn' },
   // Things to do
   { name: 'San Diego Zoo', cat: 'todo', lat: 32.7353, lng: -117.149, note: 'Balboa Park', q: 'San Diego Zoo' },
@@ -473,8 +473,14 @@ function initTravelMap() {
     9
   );
 
+  // CARTO "Dark Matter" basemap. CARTO's free basemaps now require an API key
+  // (tiles are watermarked "API KEY REQUIRED" without one). Keys are free for
+  // non-commercial use (5M tiles/month, no account needed) — request one at
+  // https://carto.com/basemaps/apikey and paste it below.
+  const CARTO_API_KEY = 'cb1_2vt8_1_820af897b5a21315b628e1bf';
+
   L.tileLayer(
-    'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    `https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png?key=${CARTO_API_KEY}`,
     {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
