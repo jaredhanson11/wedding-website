@@ -37,6 +37,8 @@ Wedding website with a vanilla HTML/JS/CSS frontend (`app/`) and a Python FastAP
 
 **RSVP** (`#/rsvp`) — RSVP deadline is October 11, 2026 (invitations sent September 2026; stated on the RSVP page and in the FAQ). Embedded WithJoy RSVP iframe, with a fallback link to open the form in a new tab. RSVP CTA buttons appear in the mobile nav bar, desktop nav bar (pinned right), and the slide-out menu.
 
+**Rehearsal Dinner** (`#/rehearsal`, unlisted) — Not linked from any nav; the URL is shared privately (via the RSVP form) with rehearsal dinner guests only. Thursday, Dec 10: Ceremony Rehearsal 12:00–1:00 PM at Ethereal Gardens (rides coordinated for guests staying in Temecula), then Rehearsal Dinner 5:00 PM at Blackbird Tavern (same venue as the Welcome Party that follows at 6:30 PM).
+
 **Registry** (`#/registry`) — Two cards linking out to the Amazon and Crate & Barrel registries. `hiddenPages` in `script.js` (currently empty) can hide a page again by redirecting its route to home.
 
 ## Development Commands

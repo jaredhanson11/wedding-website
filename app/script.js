@@ -68,6 +68,9 @@ const isIntro = !window.location.hash;
 // Pages temporarily hidden from the site (links commented out in index.html)
 const hiddenPages = [];
 
+// Unlisted pages: reachable by direct link only, never linked from the nav.
+// #/rehearsal — shared privately with rehearsal dinner guests.
+
 function handleRoute() {
   const hash = window.location.hash.slice(2); // Remove '#/' from hash
   let page = hash || 'home';
