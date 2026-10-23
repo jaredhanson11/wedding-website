@@ -25,7 +25,7 @@ Wedding website with a vanilla HTML/JS/CSS frontend (`app/`) and a Python FastAP
 **Schedule** (`#/schedule`) — Three-day breakdown, each with venue name, address, and a Google Maps directions link:
 - Thursday, Dec 10: Welcome Party, 6:30–9:00 PM at Blackbird Tavern, Old Town Temecula (optional, casual attire)
 - Friday, Dec 11: Ceremony 3:30 PM (seated by 3:15), Cocktail Hour 4:30–5:30 PM, Reception 6:00–10:00 PM at Ethereal Gardens, Escondido (black tie optional)
-- Saturday, Dec 12: Afternoon at the Vineyards, 12:00 PM, Temecula Wine Country (optional, details TBD)
+- Saturday, Dec 12: Afternoon at the Vineyards, 12:00 PM — dog-friendly wineries: Europa Village, then Mount Palomar Winery (optional; details in the FAQ)
 
 **Party** (`#/party`) — Wedding party roster in two columns (Bridesmaids / Groomsmen) with roles, plus a separate Officiant card. Best Men: Joseph Sarchett & Spencer Rust. Maid of Honor: Mandy Nick. Officiant: Blake Yarbrough.
 
@@ -33,9 +33,9 @@ Wedding website with a vanilla HTML/JS/CSS frontend (`app/`) and a Python FastAP
 
 **Travel** (`#/travel`) — Collapsible Leaflet map of all locations (`MAP_LOCATIONS` in `script.js`), airport comparison (SAN recommended, CRQ, SNA), hotel recommendations (Pechanga Resort — where the couple is staying, SpringHill Suites, Temecula Creek Inn), and things-to-do cards.
 
-**FAQ** (`#/faq`) — `<details>` accordion cards grouped under The Details, Dress Code & Guests, Food & Drink, and Logistics. Contact email: mackensie.wedding@gmail.com.
+**FAQ** (`#/faq`) — `<details>` accordion cards grouped under The Details, Dress Code & Guests, Food & Drink, Logistics, and Winery Day. Contact email: mackensie.wedding@gmail.com.
 
-**RSVP** (`#/rsvp`) — RSVP deadline is October 11, 2026 (invitations sent September 2026; stated on the RSVP page and in the FAQ). Embedded WithJoy RSVP iframe, with a fallback link to open the form in a new tab. RSVP CTA buttons appear in the mobile nav bar, desktop nav bar (pinned right), and the slide-out menu.
+**RSVP** (`#/rsvp`) — RSVP deadline is October 30, 2026 (invitations sent September 2026; stated on the RSVP page and in the FAQ). Embedded WithJoy RSVP iframe, with a fallback link to open the form in a new tab. RSVP CTA buttons appear in the mobile nav bar, desktop nav bar (pinned right), and the slide-out menu.
 
 **Rehearsal Dinner** (`#/rehearsal`, unlisted) — Not linked from any nav; the URL is shared privately (via the RSVP form) with rehearsal dinner guests only. Thursday, Dec 10: Ceremony Rehearsal 12:00–1:00 PM at Ethereal Gardens (rides coordinated for guests staying in Temecula), then Rehearsal Dinner 5:00 PM at Blackbird Tavern (same venue as the Welcome Party that follows at 6:30 PM).
 
