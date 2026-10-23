@@ -446,6 +446,9 @@ const MAP_LOCATIONS = [
   // Wedding
   { name: 'Ethereal Gardens (Venue)', cat: 'wedding', lat: 33.306, lng: -117.137, note: 'Ceremony & reception', q: 'Ethereal Gardens 8561 W Lilac Rd Escondido CA 92026', venue: true },
   { name: 'Welcome Party — Blackbird Tavern', cat: 'wedding', lat: 33.4936, lng: -117.1503, note: 'Old Town Temecula', q: 'Blackbird Tavern 41958 5th St Temecula CA 92590' },
+  { name: 'Saturday — Europa Village', cat: 'wedding', lat: 33.5246, lng: -117.0727, note: 'Winery day, 12:00 PM', q: 'Europa Village 33475 La Serena Way Temecula CA 92591' },
+  { name: 'Saturday — Wiens Family Cellars', cat: 'wedding', lat: 33.5295, lng: -117.0441, note: 'Winery day', q: 'Wiens Family Cellars 35055 Via Del Ponte Temecula CA 92592' },
+  { name: 'Saturday — Vitagliano', cat: 'wedding', lat: 33.5155, lng: -117.0205, note: 'Winery day', q: 'Vitagliano Winery 36101 Glen Oaks Rd Temecula CA 92592' },
   // Airports
   { name: 'San Diego International (SAN)', cat: 'airport', lat: 32.7336, lng: -117.1897, note: 'Recommended', q: 'San Diego International Airport' },
   { name: 'Carlsbad / McClellan-Palomar (CRQ)', cat: 'airport', lat: 33.1283, lng: -117.28, note: 'Closest, small', q: 'McClellan-Palomar Airport Carlsbad' },

@@ -24,7 +24,7 @@ Wedding website with a vanilla HTML/JS/CSS frontend (`app/`) and a Python FastAP
 
 **Schedule** (`#/schedule`) — Three-day breakdown, each with venue name, address, and a Google Maps directions link:
 - Thursday, Dec 10: Welcome Party, 6:30–9:00 PM at Blackbird Tavern, Old Town Temecula (optional, casual attire)
-- Friday, Dec 11: Ceremony 3:30 PM (seated by 3:15), Cocktail Hour 4:30–5:30 PM, Reception 6:00–10:00 PM at Ethereal Gardens, Escondido (black tie optional)
+- Friday, Dec 11: Ceremony 3:30 PM (seated by 3:15), Cocktail Hour 4:30–5:30 PM, Reception 6:00–10:00 PM at Ethereal Gardens, Escondido (formal / black tie optional)
 - Saturday, Dec 12: Afternoon at the Vineyards, 12:00 PM — dog-friendly wineries: Europa Village, then either Wiens Family Cellars or Vitagliano (optional; details in the FAQ)
 
 **Party** (`#/party`) — Wedding party roster in two columns (Bridesmaids / Groomsmen) with roles, plus a separate Officiant card. Best Men: Joseph Sarchett & Spencer Rust. Maid of Honor: Mandy Nick. Officiant: Blake Yarbrough.
